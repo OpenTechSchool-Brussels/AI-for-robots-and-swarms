@@ -1,8 +1,18 @@
 ---
 layout: default
-title:  "Setting up"
-num: 0
+title:  "Knocking some sense into it"
+num: 2
 
 ---
 
+Light sensor
+    simple: vector attraction is light. = GO TO LOCATION ?
+
+Proximity sensor
+    add obstacle to the path: obstacle avoidance = NAVIGATE
+
+Ground sensors
+    knowing when you're arrived: reaching places = LOCALISE
+
+This section's Game = ...? 
 
