@@ -8,7 +8,11 @@ num: 0
 Okay, this one will be a blast to do...
 
 
-##a) Setting Up ARGoS & Lua.
+##a) Setting Up ARGoS & Lua
 
-##b) Artficial Intelligence, embodiement & Swarm Robotics.
+##b) Artficial Intelligence
+
+##c) Embodiement
+
+##d) Swarm Robotics
 
