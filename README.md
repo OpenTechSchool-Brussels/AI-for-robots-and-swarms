@@ -1,4 +1,5 @@
-AI-for-robots-and-swarms
-========================
+Artificial Intelligence for robots and swarms
+=========================
 
-Material for the Artificial Intelligence first workshop at OTS Brussels.
+Material for the AI and robots course for OpenTechSchool Brussels.
+

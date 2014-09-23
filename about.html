@@ -1,0 +1,24 @@
+---
+layout: default
+title: About
+---
+
+This course was realised in the context of the serie of free workshops <a href="http://opentechschool.org/brussels">OpenTechSchool Brussels</a> organises. We all hope you enjoyed it! If you have any question about the workshop and OpenTechSchool or if you're just thanksfull, be sure to send us a mail. Beside, we're always looking for new students, coaches and organisers. Now, a little bit about the authors:
+<br/>
+<br/>
+<p>
+
+{% for author in site.data.authors %}
+    <p class="memberText">
+        <div class="memberImage"><img alt="{{ author.firstname }}" src="{{ site.baseurl }}/assets/images/{{ author.firstname }}.jpg" /></div>
+        <span id="{{ author.firstname }}" class="authorName">{{ author.firstname }} {{ author.lastname }}</span>: {{ author.bio }}
+        <br/>
+        Email: <a href="mailto:{{ author.email }}">{{ author.email }}</a> <br/>
+        Website: <a href="{{ author.website }}">{{ author.website }}</a>
+        {% unless forloop.last %}
+    </p>
+    <center><hr width="60%"/></center>
+    <br/>
+    {% endunless %}
+{% endfor %}
+</p>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>{{ page.title }}</title>
+        <base href="{{ site.baseurl }}/" />
+        
+        <link rel="stylesheet" href="{{ site.baseurl }}/css/main.css" />
+        <link rel="stylesheet" href="{{ site.baseurl }}/css/monokai_sublime.css">
+        <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" />
+
+        <script src="{{ site.baseurl }}/js/highlight.pack.js"></script>
+        <script> hljs.configure({tabReplace: '    '}); hljs.initHighlightingOnLoad();</script>
+    </head>
+
+
+    <body>
+
+        <!-- Header -->
+        <div class="header">
+            <a class="ots" href="http://www.opentechschool.org">OpenTechSchool</a>
+            <a href="{{ site.baseurl }}/" id="titleHeader"> {{ site.title }}</a>
+        </div>
+      
+        <!-- Middle part -->
+        <div class="site">
+            <h1 class="title">{{ page.title }}</h1>
+            <hr />
+
+	<!-- Left menu-->
+        <div class="aside">
+            <a href="{{ site.baseurl }}/">Home</a>
+            <ul>
+                {% for i in (0..site.pages.size) %} {% for post in site.pages %} {% if post.num == i %}
+                    <li><a href="{{ site.baseurl }}{{ post.url }}">log_{{post.num}} {{ post.title }}</a></li>
+                {% endif %} {% endfor %} {% endfor %}
+            </ul>
+
+            <a href="{{ site.baseurl }}/about.html">About</a>
+	    <center><hr width="60%"/></center>
+            <p class="madeBy">
+                Course by {% for author in site.data.authors %} <a href="{{ site.baseurl }}/about.html#{{ author.firstname }}"> {{ author.firstname }} </a> {% unless forloop.last %} & {% endunless %} {% endfor %} for <a href="http://www.opentechschool.org/brussels/">OTS Brussels</a>
+            </p>
+        </div>
+
+	<!-- Contect of the page (from Markdown files) -->
+        <div class="main">
+            {{ content }}
+        </div>
+
+      </div>
+
+      <!-- Footer -->
+      <div class="footer">
+          <p>© {% for author in site.data.authors %} <a href="{{ site.baseurl }}/about.html#{{ author.firstname }}">{{ author.firstname }} {{ author.lastname }}, </a> {% endfor %} <a href="http://www.opentechschool.org">OpenTechSchool</a> || Licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>
+          </p>
+      </div>
+
+  </body>
+
+</html>
