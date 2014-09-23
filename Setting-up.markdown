@@ -9,10 +9,12 @@ Okay, this one will be a blast to do...
 
 
 ##a) Setting Up ARGoS & Lua
+	
+##b) Artificial Intelligence
 
-##b) Artficial Intelligence
-
-##c) Embodiement
+##c) Embodiment
+robot (actuator/sensor & brain)
 
 ##d) Swarm Robotics
+(local sensing, emphasis on interaction among robots, heterogeneity)
 
