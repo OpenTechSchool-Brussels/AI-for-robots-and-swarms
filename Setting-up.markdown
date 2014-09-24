@@ -1,4 +1,4 @@
----
+--
 layout: default
 title:  "Setting up"
 num: 0
@@ -18,5 +18,7 @@ robot (actuator/sensor & brain)
 ##d) Swarm Robotics
 (local sensing, emphasis on interaction among robots, heterogeneity)
 
-##e) Your first code
+##e) ARGoS Simulator
+
+##f) Your first code
 Understanding the functions, just "logging" for now.
