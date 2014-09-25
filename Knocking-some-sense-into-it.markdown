@@ -5,14 +5,17 @@ num: 2
 
 ---
 
-Light sensor
-    simple: vector attraction is light. = GO TO LOCATION ?
+Ground sensors (?)
+    knowing when you're arrived: reaching places = LOCALISE
 
 Proximity sensor
     add obstacle to the path: obstacle avoidance = NAVIGATE
 
-Ground sensors
-    knowing when you're arrived: reaching places = LOCALISE
+Light sensor
+    Locating the light (do we get distance or just angle?)
+    If distance too => Braintenberg vehicules :D
+    If not, then we'll use the camera...
+    
 
-This section's Game = ...? 
+This section's Game = Something based on Braintenberg vehicules! 
 
