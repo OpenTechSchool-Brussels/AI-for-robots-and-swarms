@@ -38,7 +38,6 @@ If you did previous step experiment, you'll have seen that moving forward means 
     robot.wheels.set_velocity(leftSpeed,rightSpeed)
 ```
 
-
 ## c) Forces of attraction
 While concept of foward/backward and turning are fitting when you are piloting the robot from the inside, this is not exactly what would fit best in our context. We want to be able to command the robot and giving him order: avoiding stuff, going to places... Those orders can be seen as forces, attraction for places you want to go to, repulsion for places you want to avoid. We will represent those forces using vectors.
 
@@ -76,8 +75,8 @@ function speedFromForce(f)
     kF = 1.0 
     kA = 1.0 
 
-    forward = force.x * kF
-    angular = force.y * kA
+    forward = f.x * kF
+    angular = f.y * kA
 
     leftSpeed = forward + angular
     rightSpeed = forward - angular
@@ -85,6 +84,8 @@ function speedFromForce(f)
     robot.wheels.set_velocity(leftSpeed,rightSpeed)
 end
 ```
+
+You could parametrise this function a lot already. On top of using *kF* and *kA* to control the impact of forward and angular force, you might want to only allow forward movement (meaning only positive *forward* value), saturate your speed, or even only allow one speed (so the force only define the direction)...
 
 Armed with this function, we can already create some interesting, if simple, behaviors.
 
@@ -100,6 +101,18 @@ Actually, not that hard. We'll be using the `math` library for everything math r
     randForce = {x = 35 * math.cos(angle), y = 35 * math.sin(angle) }
     speedFromForce(randForce)
 ```
+
+One could even make a function out of it that returns a vector (as a table):
+
+```lua
+function randForce(val)
+    angle = robot.random.uniform(- math.pi/2, math.pi/2)
+    randomForce = {x = val * math.cos(angle), y = val * math.sin(angle) }
+    return randomForce
+end
+```
+
+In order to use it, just call it and affect the return value to a table `f = randForce(35)`.
 
 ## e) ==Fog of war==
 No luck Mario, your princess is in another castle... This part will be done for the next workshop!
