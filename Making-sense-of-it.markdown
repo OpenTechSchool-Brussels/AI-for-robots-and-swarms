@@ -1,6 +1,6 @@
 ---
 layout: default
-title:  "Knocking some sense into it"
+title:  "Making sense of it"
 num: 2
 
 ---
