@@ -29,20 +29,20 @@ PICTURE OF DIFFERENTIAL DRIVE
 If you did previous step experiment, you'll have seen that moving forward means having same speed on both wheels, while turning on yourself implies having oposite speed. In our case we'll just combine the two in order to have the full behavior (moving forward/backward & turning).
 
 ```lua
- forward = 10 -- Arbitrary value--
- angular = 10 -- Arbitrary value--
+    forward = 10
+    angular = 1
 
- leftSpeed = forward + angular
- rightSpeed = forward - angular
+    leftSpeed = forward + angular
+    rightSpeed = forward - angular
 
- robot.wheels.set_velocity(leftSpeed,rightSpeed)
+    robot.wheels.set_velocity(leftSpeed,rightSpeed)
 ```
 
 
 ## c) Forces of attraction
 While concept of foward/backward and turning are fitting when you are piloting the robot from the inside, this is not exactly what would fit best in our context. We want to be able to command the robot and giving him order: avoiding stuff, going to places... Those orders can be seen as forces, attraction for places you want to go to, repulsion for places you want to avoid. We will represent those forces using vectors.
 
-Being in 2D, a vector will only have an x and y component. In lua, a vector can be described by the table structure: ` vector = { x = 0, y = 0}` you then simply use those values with `vector.x = vector.y * 2`.
+Being in 2D, a vector will only have an x and y component. In lua, a vector can be described through a table structure: ` vector = { x = 0, y = 0}`. You can then simply use and affect those values: `vector.x = 2`.
 
 PICTURE ROBOT FORCE GOING SOMEWHERE
 
@@ -54,21 +54,39 @@ This means that once a force is defined, you can use the following code to contr
  
 
 ```lua
+    force = {x =10, y=5}
 
- force = {x =10, y=5}
+    forward = force.x * 1.0 -- Those multiplyng factors define how strong
+    angular = force.y * 0.3 -- the robot turns and moves forward 
 
- forward = force.x * 1.0 -- you can change both those value depending on--
- angular = force.y * 0.1 -- how strong you want the robot to be able to turn -- 
+    leftSpeed = forward + angular
+    rightSpeed = forward - angular
 
- leftSpeed = forward + angular
- rightSpeed = forward - angular
-
- robot.wheels.set_velocity(leftSpeed,rightSpeed)
+    robot.wheels.set_velocity(leftSpeed,rightSpeed)
 ```
 
 Once satisfied with the behavior, you can even sum up the previous lines in only one (plus the definition of the force).
 
 Not only does this allow a more human way of controlling the robot, it's also a very generic way to control it. For instance, when many forces are applied to the robot, you only need to add them before applying the previous snippnet of code.
+
+Since it'll be a piece of code we'll reuse a lot and won't change much (if at al), let's make it a function that takes a force as input, and setup the speed of the wheels:
+
+```lua
+function speedFromForce(f)
+    kF = 1.0 
+    kA = 1.0 
+
+    forward = force.x * kF
+    angular = force.y * kA
+
+    leftSpeed = forward + angular
+    rightSpeed = forward - angular
+
+    robot.wheels.set_velocity(leftSpeed,rightSpeed)
+end
+```
+
+Armed with this function, we can already create some interesting, if simple, behaviors.
 
 ## d) Random walk
 If artificial intelligent is always artificial, it's not always as intelligent as one might think in advance. Some times randomness is enough, and it's the power of chaos we'll feed on here. You can (and should in the context of our simulaton) access random values in the `robot.random` table. See in the references the many possibilities, but the one we'll be starting with is the `robot.random.uniform(min,max)` function, which will randomly chose a number between the min and max parameter.
@@ -78,13 +96,12 @@ A random walk is a common mean of exploiting an area. While randomness is someth
 Actually, not that hard. We'll be using the `math` library for everything math related. Such a fitting name for the library.
 
 ```lua
-  angle = robot.random.uniform(- math.pi/2, math.pi)
-  randForce = {x = 35 * math.cos(angle), y = 35 * math.sin(angle) }
-  -- [[ Why 35? Why not. Put the value you want, defining the strenght
-  of your random walk ]]--
+    angle = robot.random.uniform(- math.pi/2, math.pi/2)
+    randForce = {x = 35 * math.cos(angle), y = 35 * math.sin(angle) }
+    speedFromForce(randForce)
 ```
 
 ## e) ==Fog of war==
-No luck Mario, your princess is in another castle... This part will be done for next workshop!
+No luck Mario, your princess is in another castle... This part will be done for the next workshop!
 This section's Game: covering arena as best as you can.
 
