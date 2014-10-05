@@ -56,6 +56,7 @@ In order to detect object around them, the robots are equipped with proximity se
 DESSIN PROXIMITY SENSOR
 
 Here is an example of reading, for logging purpose:
+
 ```lua
     log("----")
     for i = 1,24 do
@@ -91,12 +92,13 @@ On of the most common usage (but not the only one) for the proximity sensors is 
 
 You might as well create a function for the avoidance part of the code, returning a force, as for the `randForce(val)` function. I'll let you do that one!
 
-##c) There shall be ligh
+##c) There shall be light
 You reach nowhere in life if all you do is avoiding stuff. This is why in this section we'll play with the light sensors, which usualy robots (as insects) loooove to go toward.
 
 The light sensor is working pretty much like the proximity sensors. 24 sensors all around the robot in circle, readings in the table `robot.light` with *value* and *angle* as keys. The neutral value, 0, means that no lights are detected, the value increase up until 1 when the light is closer to the robot.
 
 The example for logging purpose is pretty much the same:
+
 ```lua
     log("----")
     for i = 1,24 do
