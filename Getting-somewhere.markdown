@@ -5,12 +5,14 @@ num: 4
 
 ---
 
-Is it really an interesting section?
-Too short as it is right now anyway.
+Is it really an interesting section? :( Need to have a better pitch, better story...
 
-Odometry
-    round trips between two areas = REMEMBERING, FRAME OF REFERENCE
+##a) Odometry
 
-    Rq: Noise
+##b) Frame of reference
 
-This section's Game = foraging
+##c) Noise
+
+##d) Navigation with memory
+
+##e) ==Foraging==
