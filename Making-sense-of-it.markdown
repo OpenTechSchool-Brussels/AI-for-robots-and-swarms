@@ -128,10 +128,7 @@ So, let's move toward the light. Have an idea of how to do that? You can base yo
 
     speedFromForce(sumForce)
 ```
-   
- 
-##d) Braintenberg vehicules (yay! :D :D)
-I confess a particularly strong love for those so called vehicules.
 
-##e) ==Free for all== 
+
+##d) ==Free for all== 
 Same than previously, no time yet to create the game...
