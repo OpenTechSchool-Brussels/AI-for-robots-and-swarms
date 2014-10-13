@@ -24,7 +24,6 @@ So, if you tryed already to give more complex navigational behavior from this si
 
 How to know what values to feed both wheels when you know the forward speed and angular speed? This depends on the way your robot move, and in our case, with those two wheels, it's defined by a system called differential drive.
 
-PICTURE OF DIFFERENTIAL DRIVE
 ![differential drive](./assets/robot_wheels.png)
 
 If you did previous step experiment, you'll have seen that moving forward means having same speed on both wheels, while turning on yourself implies having oposite speed. In our case we'll just combine the two in order to have the full behavior (moving forward/backward & turning).
