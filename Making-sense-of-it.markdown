@@ -20,7 +20,7 @@ In our case, those readings contains a table composed of *value* an *offset*. Th
     log("----")
     for i = 1,4 do
         log(robot.motor_ground[i].value)
-        log(robot.motor_ground[i].offset.x .. " " .. robot.motor_ground[i].offset.x)
+        log(robot.motor_ground[i].offset.x .. " " .. robot.motor_ground[i].offset.y)
     end
 ```
 
