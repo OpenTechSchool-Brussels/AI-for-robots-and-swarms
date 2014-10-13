@@ -12,7 +12,7 @@ Not only does that implies a realistic understanding, but also the capacity to s
 
 The grounds sensors are 4 sensors on the lower part of the robot, aiming at the ground, in order to read its brightness. They output a value between 0 and 1; 0 for black and 1 for white, shade of gray in between.
 
-![ground sensor](./assets/robot_motor_grund.png)
+![ground sensor](./assets/robot_motor_ground.png)
 
 In our case, those readings contains a table composed of *value* an *offset*. The value refers to the brightness, and the offset to a vector for the position of the specific sensor stemming from the center of the robot:
 
