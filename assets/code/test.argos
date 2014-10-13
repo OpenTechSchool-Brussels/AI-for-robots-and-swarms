@@ -24,7 +24,7 @@
         <footbot_proximity implementation="default" show_rays="true" />
         <footbot_light implementation="rot_z_only" />
       </sensors>
-      <params script="./testTest.lua" />
+      <params />
     </lua_controller>
 
   </controllers>
