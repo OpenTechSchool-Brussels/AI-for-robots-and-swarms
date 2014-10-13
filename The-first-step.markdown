@@ -13,7 +13,6 @@ The way you command anything that move is linked with the actuators ressponsible
 ## a) One robot, two wheels
 Actually, they are "treels", some neologism between wheels and trails. But for all your concern, you can see the robot as a segway: two wheels along the horizontal axis.
 
-PICTURE OF ROBOTS.
 ![the marxbot](./assets/marxbot.jpg)
 
 Your robot will move thanks to these wheels, and for that you need to order those wheels to roll at a specifid speed. This is done through the `robot.wheels.set_velocity(leftS, rightS)` function, accepting two values (left and right speed) as parameters, both measured in cm/s. Positive values will make wheels roll forward, negative will make them roll backward.
