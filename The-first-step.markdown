@@ -14,6 +14,7 @@ The way you command anything that move is linked with the actuators ressponsible
 Actually, they are "treels", some neologism between wheels and trails. But for all your concern, you can see the robot as a segway: two wheels along the horizontal axis.
 
 PICTURE OF ROBOTS.
+![the marxbot](./assets/marxbot.jpg)
 
 Your robot will move thanks to these wheels, and for that you need to order those wheels to roll at a specifid speed. This is done through the `robot.wheels.set_velocity(leftS, rightS)` function, accepting two values (left and right speed) as parameters, both measured in cm/s. Positive values will make wheels roll forward, negative will make them roll backward.
 
@@ -25,6 +26,7 @@ So, if you tryed already to give more complex navigational behavior from this si
 How to know what values to feed both wheels when you know the forward speed and angular speed? This depends on the way your robot move, and in our case, with those two wheels, it's defined by a system called differential drive.
 
 PICTURE OF DIFFERENTIAL DRIVE
+![differential drive](./assets/robot_wheels.png)
 
 If you did previous step experiment, you'll have seen that moving forward means having same speed on both wheels, while turning on yourself implies having oposite speed. In our case we'll just combine the two in order to have the full behavior (moving forward/backward & turning).
 
@@ -42,8 +44,6 @@ If you did previous step experiment, you'll have seen that moving forward means 
 While concept of foward/backward and turning are fitting when you are piloting the robot from the inside, this is not exactly what would fit best in our context. We want to be able to command the robot and giving him order: avoiding stuff, going to places... Those orders can be seen as forces, attraction for places you want to go to, repulsion for places you want to avoid. We will represent those forces using vectors.
 
 Being in 2D, a vector will only have an x and y component. In lua, a vector can be described through a table structure: ` vector = { x = 0, y = 0}`. You can then simply use and affect those values: `vector.x = 2`.
-
-PICTURE ROBOT FORCE GOING SOMEWHERE
 
 The most astute will have seen that in the robot frame of reference, the x axis is vertical forward while the y axis is horizontal toward left. This is in order to use the z axis goind through the robot, in the up direction.
 

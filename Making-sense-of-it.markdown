@@ -12,7 +12,7 @@ Not only does that implies a realistic understanding, but also the capacity to s
 
 The grounds sensors are 4 sensors on the lower part of the robot, aiming at the ground, in order to read its brightness. They output a value between 0 and 1; 0 for black and 1 for white, shade of gray in between.
 
-PICTURES GROUND SENSORS
+![ground sensor](./assets/robot_motor_grund.png)
 
 In our case, those readings contains a table composed of *value* an *offset*. The value refers to the brightness, and the offset to a vector for the position of the specific sensor stemming from the center of the robot:
 
@@ -53,7 +53,7 @@ Let's see now how to interact with physical objects.
 
 In order to detect object around them, the robots are equipped with proximity sensors, 24 of them, spread in a ring aroung the robot body. Each sensor has a range of 10cm and returns a reading composed of an *angle* in radians and a *value* between 0 and 1. The angle defines the position of the sensors, and the value is as high as the object is close (0 means nothing is detected). The table containing those readings is `robot.proximity`
 
-DESSIN PROXIMITY SENSOR
+![proximity](./assets/robot_proximity.png)
 
 Here is an example of reading, for logging purpose:
 
@@ -96,6 +96,8 @@ You might as well create a function for the avoidance part of the code, returnin
 You reach nowhere in life if all you do is avoiding stuff. This is why in this section we'll play with the light sensors, which usualy robots (as insects) loooove to go toward.
 
 The light sensor is working pretty much like the proximity sensors. 24 sensors all around the robot in circle, readings in the table `robot.light` with *value* and *angle* as keys. The neutral value, 0, means that no lights are detected, the value increase up until 1 when the light is closer to the robot.
+
+![proximity](./assets/robot_light.png)
 
 The example for logging purpose is pretty much the same:
 
