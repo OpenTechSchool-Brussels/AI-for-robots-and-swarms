@@ -32,8 +32,8 @@ If you did previous step experiment, you'll have seen that moving forward means 
     forward = 10
     angular = 1
 
-    leftSpeed = forward + angular
-    rightSpeed = forward - angular
+    leftSpeed = forward - angular
+    rightSpeed = forward + angular
 
     robot.wheels.set_velocity(leftSpeed,rightSpeed)
 ```
@@ -76,8 +76,8 @@ function speedFromForce(f)
     forward = f.x * kF
     angular = f.y * kA
 
-    leftSpeed = forward + angular
-    rightSpeed = forward - angular
+    leftSpeed = forward - angular
+    rightSpeed = forward + angular
 
     robot.wheels.set_velocity(leftSpeed,rightSpeed)
 end
