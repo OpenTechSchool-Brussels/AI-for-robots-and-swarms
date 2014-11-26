@@ -56,8 +56,8 @@ This means that once a force is defined, you can use the following code to contr
     forward = force.x * 1.0 -- Those multiplyng factors define how strong
     angular = force.y * 0.3 -- the robot turns and moves forward 
 
-    leftSpeed = forward + angular
-    rightSpeed = forward - angular
+    leftSpeed = forward - angular
+    rightSpeed = forward + angular
 
     robot.wheels.set_velocity(leftSpeed,rightSpeed)
 ```
