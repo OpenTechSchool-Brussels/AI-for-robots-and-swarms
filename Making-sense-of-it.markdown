@@ -65,8 +65,6 @@ Here is an example of reading, for logging purpose:
     end
 ```
 
-Beware: as you might have noted from the picture, the sensors are numbered counter clock wise, meaning that if you want to use the *angle* variable, you'll need to use the inverse of it.
-
 On of the most common usage (but not the only one) for the proximity sensors is to avoid obstacles (would that be object on the path, or other robots). This one will be a bit tougher than previous example. Can you imagine how to do so? We reuse the force paradigm we had previously, but now we have many forces, one per readings. If I detect an object, I should not be attracted to it (as previous forces worked) but repulsed by it. So, one repulsion force per reading, you sum them up, add the random force, and then process the force to caluculate the speed. Hell, things are starting to get serious! Try to create the behavior by yoursel, and if you're get stuck, below is a working solution.
 
 ```lua
@@ -78,7 +76,7 @@ On of the most common usage (but not the only one) for the proximity sensors is 
         v = - robot.proximity[i].value * 10 
         a = robot.proximity[i].angle
 
-        fAvoidance = {x = v * math.cos(-a), y = v * math.sin(-a)}
+        fAvoidance = {x = v * math.cos(a), y = v * math.sin(a)}
         sumForce.x = sumForce.x + fAvoidance.x
         sumForce.y = sumForce.y + fAvoidance.y
     end
@@ -119,7 +117,7 @@ So, let's move toward the light. Have an idea of how to do that? You can base yo
         v = robot.light[i].value * 10
         a = robot.light[i].angle
 
-        fLight = {x = v * math.cos(-a), y = v * math.sin(-a)}
+        fLight = {x = v * math.cos(a), y = v * math.sin(a)}
         sumForce.x = sumForce.x + fLight.x
         sumForce.y = sumForce.y + fLight.y
     end
