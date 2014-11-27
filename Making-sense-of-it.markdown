@@ -132,8 +132,8 @@ function lightForce()
             val = 0
         end
     
-        -- "+30" for a strong attraction 
-        v = +30 * val 
+        -- "30" for a strong attraction 
+        v = 30 * val 
         a = robot.light[i].angle
 
         sensorForce = {x = v * math.cos(a), y = v * math.sin(a)}
