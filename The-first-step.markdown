@@ -92,15 +92,11 @@ You could parametrise this function a lot already. On top of modifying the multi
 Armed with this function, we can already create some interesting, if simple, behaviours.
 
 ## d) Random walk
-If artificial intelligent is always artificial, it's not always as intelligent as one might think in advance. Some times randomness is enough.
+If artificial intelligent is always artificial, it's not always as intelligent as one might think in advance. Some times randomness is enough. While Lua has its own random functions, we'll prefere here to use the one of ARGoS: `robot.random`. You can dig the reference page to check the many possibilities, but the one we'll be starting with is the `robot.random.uniform(min,max)` function, which will randomly chose a number between the min and max parameter.
 
-We'll tap in the power of chaos to let our robot explore the arena in a suitable way. You can (and should, in the context of our simulation) access random values through the `robot.random` table. See in the references the many possibilities, but the one we'll be starting with is the `robot.random.uniform(min,max)` function, which will randomly chose a number between the min and max parameter.
+We'll use this randomness to code what we call a random walk, usualy the default way of exploring areas. It's not as straight forward as using random speed values on the wheel (try it and you'll see what I mean). In our case, we'll force the robot to move at a constant speed with a random direction direction as long as its moving forward (not backward). Try to process what could mean each part of previous sentence in terms of code.
 
-A random walk is a common way of exploring an area. While randomness is something you use, it's not always a straight use. Try to put random values for the speed of your wheels and you'll see what I mean. In our case, while we'll have random direction, we'll force the robot to move forward and at a constant speed. Try to process what could mean each part of previous sentence in terms of code.
-
-Since we'll guide the robot, we'll use a force. A constant speed means that our random force will always have the same amplitude. A random direction means that it can be between -pi & pi. Only moving forward means that we restrict angles that would make the robot go backward, which leaves us with the [-pi/2, pi/2] range.
-
-Now, how on hell can you create a vector not based on x & y componant, but defined by an amplitude and a vector? Through the magic of trigonometry. If we use k for amplitude and a for angle: `vec = {x = k * math.cos(a), y = k * math.sin(a) }`
+Since we'll guide the robot, we'll use a force. A constant speed means that our random force will always have the same amplitude. A random direction means that it can be between -pi & pi. Only moving forward means that we restrict angles that would make the robot go backward, which leaves us with the [-pi/2, pi/2] range. Now, how on hell can you create a vector not based on x & y componant, but defined by an amplitude and a vector? Through the magic of trigonometry. If we use k for amplitude and a for angle: `vec = {x = k * math.cos(a), y = k * math.sin(a) }`
 
 Try to think on how to bring together all those Lego bricks to get the random walk of your dreams. If you're curious, below is a proposed solution:
 
