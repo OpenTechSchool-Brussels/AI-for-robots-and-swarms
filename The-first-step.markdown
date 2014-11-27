@@ -1,19 +1,15 @@
 ---
 layout: default
-title:  "The first step"
+title:  "Let's get rolling"
 num: 1
-
 ---
 
-
-Actually, the first roll.
-
-The way you command anything that move is linked with the actuators ressponsible for its moving. You won't control a car, a 4 leg robot or a rocket the same way. In this section we'll discover how to command your robot, and build better ways to do so.
+The way you command anything that move is linked with the actuators responsible for its moving. You won't control a car, a 4 leg robot or a rocket the same way. In this section we'll discover how to command your robot, and build better ways to do so.
 
 ## a) One robot, two wheels
 Actually, they are "treels", some neologism between wheels and trails. But for all your concern, you can see the robot as a segway: two wheels along the horizontal axis.
 
-![the marxbot](./assets/marxbot.jpg)
+![the marxbot =250x](./assets/marxbot.jpg)
 
 Your robot will move thanks to these wheels, and for that you need to order those wheels to roll at a specifid speed. This is done through the `robot.wheels.set_velocity(leftS, rightS)` function, accepting two values (left and right speed) as parameters, both measured in cm/s. Positive values will make wheels roll forward, negative will make them roll backward.
 
