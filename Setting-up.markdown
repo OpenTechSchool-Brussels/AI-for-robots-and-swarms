@@ -22,12 +22,10 @@ First of all, we need to install our environment. Since ARGoS depends on Lua, in
 In order to check if ARGoS is well installed, just type `argos3 --version`, a green text should appear with the version name of currently installed ARGoS.
 
 ##b) ARGoS Simulator
-ARGoS is a multi-physics robot simulator easily customizable by adding new plug-ins. It can simulate large-scale swarms of robots of any kind efficiently. Its accuracy aims to be as close as possible to real simulation, making it the perfect first step before porting your code on real robot.
+ARGoS is a multi-physics robot simulator easily customizable by adding new plug-ins. It can simulate large-scale swarms of robots of any kind efficiently. Its accuracy aims to be as close as possible to real simulation, making it the perfect first step before porting your code on real robot. ARGoS doesn't work on its own, you need to feed him 3 stuff:
 
-ARGoS doesn't work on its own, you need to feed him 3 stuff:
-
-* The robot brain (either C++ code or, as in our case, Lua code);
-* An environment code (only in C++), either to update the world information or to add more visuals; 
+* the robot brain (either C++ code or, as in our case, Lua code);
+* an environment code (only in C++), either to update the world information or to add more visuals; 
 * and last, a .argos (XML) file describing the experimental setup.
 
 The environment code (loop functions) will be given to you when needed, nothing to worry or care much about. While the .argos files will be given to you too, we will refer to it sometimes and you might even want on your own to make a few modifications to the experimental setup (changing the number of robots in the arena, the position of places of interest, etc. etc. ). We hope the files we provide are sufficiently commented for you to be able to work it out on your own. Last, and most important: the brain of the robots. This is what we'll be mainly working on in this workshop.
@@ -40,17 +38,21 @@ You should see two new windows appearing. One is a text editor (where you will t
 
 You will find in the simulator a view of your arena on the centre, two text area for logging purposes on the right, and some control on the top (play, stop, step by step, forward, reset, screen-shot, camera options...). Play launches the simulation, other buttons behave as expected in such context.
 
-In the Lua code editor, you will find that there is some functions defined, characterising a code structure. As already well explained in the comments, they are :
+In the Lua code editor, you will find that there is some functions defined, characterising a code structure. As already well explained in the comments, they are:
+
 * **init** : launch once at the creation of the robots
 * **step** : launch at each step of the experiment
 * **reset** : launch when the reset button is pressed
 * **destroy** : launch at the end of the experiment
 
-In a first step, you won't have to deal with **reset** & **destroy** (a nice name for a heavy metal band).
-
 Let's launch our first experimentation to better understand what's happening. On top of all the power of Lua, ARGoS provide you with a specific container, adequately called `robot`. Anything robot related (sensor & actuator) will go through it. Type inside the step function the following line :
 
 ```Lua
+log("Hello, my name is " .. robot.id)
+```
+
+
+```lua
 log("Hello, my name is " .. robot.id)
 ```
 
