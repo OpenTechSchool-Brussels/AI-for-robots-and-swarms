@@ -25,7 +25,7 @@ addEvent(window, "resize", function() {
 );
 
 
-addEvent(window, "onLoad", function() {
+addEvent(window, "load", function() {
                         
                           //alert("d width =" + window.innerWidth);
                           if(window.innerWidth < 702) {
