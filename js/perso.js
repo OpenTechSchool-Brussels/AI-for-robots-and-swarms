@@ -15,7 +15,7 @@ addEvent(window, "resize", function() {
                           //alert("d width =" + window.innerWidth);
                           if(window.innerWidth < 702) {
                             document.getElementById("p_menu").style.width ="100%";
-                            document.getElementById("p_menu").style.margin-bottom ="10px";
+                            //document.getElementById("p_menu").style.margin-bottom ="10px";
                             document.getElementById("p_content").style.width = "100%";
                           } else {
                             document.getElementById("p_menu").style.width = "23%";
