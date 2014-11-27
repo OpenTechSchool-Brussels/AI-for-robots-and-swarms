@@ -24,7 +24,7 @@ In order to check if ARGoS is well installed, just type `argos3 --version`, a gr
 ##b) ARGoS Simulator
 ARGoS is a multi-physics robot simulator easily customizable by adding new plug-ins. It can simulate large-scale swarms of robots of any kind efficiently. Its accuracy aims to be as close as possible to real simulation, making it the perfect first step before porting your code on real robot.
 
-ARGoS don't work on its own, you need to feed him 3 stuff:
+ARGoS doesn't work on its own, you need to feed him 3 stuff:
 
 * The robot brain (either C++ code or, as in our case, Lua code);
 * An environment code (only in C++), either to update the world information or to add more visuals; 
