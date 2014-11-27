@@ -36,19 +36,35 @@ The environment code (loop functions) will be given to you when needed, nothing 
 ##c) Your first code
 Let's release the beast. In order to launch ARGoS, you need to write in the command line `argos3 -c _expSetup_` where `_expSetup_` is your experimental setup file (the .argos file) and the c in the `-c` flag stands for configuration. [Here]() is the test file we'll be using in this section. Download the file, and type `argos3 -c setup.argos` where you put it.
 
-You should see two new windows appearing. One is a text editor (where you will type your Lua code and compile it), the other one is the ARGoS simulator itself. In the later, you have a view of your arena, two text area for logging purposes, and some control on the top (play, stop, step by step, forward, camera options).
+You should see two new windows appearing. One is a text editor (where you will type your Lua code and execute it), the other one is the ARGoS simulator itself.
 
+You will find in the simulator a view of your arena on the centre, two text area for logging purposes on the right, and some control on the top (play, stop, step by step, forward, reset, screen-shot, camera options...). Play launches the simulation, other buttons behave as expected in such context.
 
-Lua code stuff.
+In the Lua code editor, you will find that there is some functions defined, characterising a code structure. As already well explained in the comments, they are :
+* **init** : launch once at the creation of the robots
+* **step** : launch at each step of the experiment
+* **reset** : launch when the reset button is pressed
+* **destroy** : launch at the end of the experiment
 
-Basic functions when you arrive
-Notion of "ticks" for execution
+In a first step, you won't have to deal with **reset** & **destroy** (a nice name for a heavy metal band).
 
-Base of Lua (scope variable, table & copy table, ref page.
+Let's launch our first experimentation to better understand what's happening. On top of all the power of Lua, ARGoS provide you with a specific container, adequately called `robot`. Anything robot related (sensor & actuator) will go through it. Type inside the step function the following line :
 
-robot table (don't feed it straight). Logging of id
+```Lua
+log("Hello, my name is " .. robot.id)
+```
+
+where log is an ARGoS specific function, re-routing to the logging text areas that we mentioned earlier, and robot.id refers to the robot own identification number.
+
+Apart from the classic text editor functionality, you'll see on the right end a little gear icon. Click on it (or press **Ctrl-E**) to execute your code. Once done, the code is loaded in the ARGoS simulator, you can just press play and see its wonder. Which isn't much (yes, the robot can move, they are just sleepy right now). On the right side, you'll see time steps and logging information. The simulation of the world here is executed steps by steps. At each steps (or ticks), the function `step` is called for each robots, and is resolved.
 
 ##d) Reference material
+Now a bit of Lua. There is scope for variables. If you want a variable to work as some global memory of your robot, you need to make it global by defining it at the top of your code (not in a function). You'll see that Lua has only one container type, *tables*, being associative arrays. They store a set of key/value pairs. (Imagine an array that you can access not only with numbers, and if with numbers, not necessarily in a straight order). When lost, you can refer to [this page](http://iridia.ulb.ac.be/~cpinciroli/extra/h-414/#programming_robots_lua) for a basics of how Lua handle classic stuff (loops, if then, etc. etc.) and a deeper understanding of tables.
+
+[Lower on the same page](http://iridia.ulb.ac.be/~cpinciroli/extra/h-414/#programming_robots_robot), you will find a list of what the robot can do, and how to make it work with Lua. Last, you can use the help from the command line, by typing `argos3 -q _Something_` (q for query). `_Something_` can be either `all` if you want info on everything, or the name of sensors, actuators, type of objects in the arena...
+
+While you might not have to use any of both, those two places will be of great help if you get lost or want to wonder out of beaten tracks.
+
 
 ##e) Artificial Intelligence
 Entity/function, many many stuff...
