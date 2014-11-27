@@ -101,9 +101,10 @@ Now we're getting somewhere!
 ##c) There shall be light
 This is why in this section we'll play with the light sensors, which usualy robots (as insects) loooove to go toward.
 
+<img src="./assets/robot_light.png" alt="light sensor" style="float:right; margin:10px;">
+
 The light sensor is working pretty much like the proximity sensors. 24 sensors all around the robot in circle, readings in the table `robot.light` with *value* and *angle* as keys. The neutral value, 0, means that no lights are detected, the value increase up until 1 when the light is closer to the robot.
 
-<img src="./assets/robot_light.png" alt="light sensor" style="float:right; margin:10px;">
 
 The example for logging purpose is pretty much the same:
 
