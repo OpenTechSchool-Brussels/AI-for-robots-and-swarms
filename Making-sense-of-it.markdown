@@ -7,7 +7,7 @@ num: 2
 While randomly rushing in the wall has its fun, let's use a few sensor so we can link the actions of our robots with what it perceives.
 
 ##a) Looking at your feet
-Or at least in the same direction: in this section, we'll see how the robot can detect gray level on the grounds. While not a super sexy super power, it's very useful to realise you're in a specific location.
+Or at least in the same direction: here we'll see how the robot can detect gray level on the grounds. While not a super sexy super power, it's very useful to realise you're in a specific location.
 
 <img src="./assets/robot_motor_ground.png" alt="ground sensor" style="float:right; margin:10px;">
 
@@ -99,9 +99,11 @@ speedFromForce(sumForce)
 Now we're getting somewhere!
 
 ##c) There shall be light
-This is why in this section we'll play with the light sensors, which usualy robots (as insects) loooove to go toward.
 
 <img src="./assets/robot_light.png" alt="light sensor" style="float:right; margin:10px;">
+
+This is why in this section we'll play with the light sensors, which usualy robots (as insects) loooove to go toward.
+
 
 The light sensor is working pretty much like the proximity sensors. 24 sensors all around the robot in circle, readings in the table `robot.light` with *value* and *angle* as keys. The neutral value, 0, means that no lights are detected, the value increase up until 1 when the light is closer to the robot.
 
