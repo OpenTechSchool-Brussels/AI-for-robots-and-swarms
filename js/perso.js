@@ -18,7 +18,7 @@ addEvent(window, "resize", function() {
                             document.getElementById("p_content").style.width = "100%";
                           } else {
                             alert("small")
-                            document.getElementById("p_menu).style.width = "23%";
+                            document.getElementById("p_menu").style.width = "23%";
                             alert(document.getElementById("p_menu").style);
                             document.getElementById("p_content").style.width = "69%";
                           }
