@@ -11,7 +11,7 @@ Actually, they are "treels", some neologism between wheels and trails. But for a
 
 
 
-<img src="./assets/marxbot.jpg" alt="picture of the marxbot" style="height:100px">
+<img src="./assets/marxbot.jpg" alt="picture of the marxbot" style="height:300px; float:right;">
 
 Your robot will move thanks to these wheels, and for that you need to order those wheels to roll at a specifid speed. This is done through the `robot.wheels.set_velocity(leftS, rightS)` function, accepting two values (left and right speed) as parameters, both measured in cm/s. Positive values will make wheels roll forward, negative will make them roll backward.
 
