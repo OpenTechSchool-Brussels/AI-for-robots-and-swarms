@@ -63,11 +63,11 @@ On of the most common usage for the proximity sensors is to avoid obstacles (obj
 First we create a function for getting the avoidance force:
 
 ```lua
-function avoidForce(val)
+function avoidForce()
     avoidanceForce = {x = 0, y = 0}
     for i = 1,24 do
-        -- "-10" for a strong repulsion 
-        v = -10 * robot.proximity[i].value 
+        -- "-30" for a strong repulsion 
+        v = -30 * robot.proximity[i].value 
         a = robot.proximity[i].angle
 
         sensorForce = {x = v * math.cos(a), y = v * math.sin(a)}
@@ -102,13 +102,9 @@ Now we're getting somewhere!
 
 <img src="./assets/robot_light.png" alt="light sensor" style="float:right; margin:10px;">
 
-This is why in this section we'll play with the light sensors, which usualy robots (as insects) loooove to go toward.
+Up until now, the robots had only very local information. Patch of colors under him or object near him. Here, we will use light sensors to detect light object at a distance.
 
-
-The light sensor is working pretty much like the proximity sensors. 24 sensors all around the robot in circle, readings in the table `robot.light` with *value* and *angle* as keys. The neutral value, 0, means that no lights are detected, the value increase up until 1 when the light is closer to the robot.
-
-
-The example for logging purpose is pretty much the same:
+The light sensor is working pretty much like the proximity sensors. 24 sensors all around the robot in circle, readings in the table `robot.light` with *value* and *angle* as keys. The neutral value, 0, means that no lights are detected, the value increase up until 1 when the light is closer to the robot. The example for logging purpose is pretty much the same:
 
 ```lua
 log("----")
@@ -118,24 +114,53 @@ for i = 1,24 do
 end
 ```
 
-So, let's move toward the light. It's actually virtually the same than what we did with the proximity sensor, just with another sensor, and you get rid of the leading minus (the *-* in previous *-10*) on the value of the sensor since it's an attraction, and not a repulsion.
+So, let's make robots move toward the light. It's actually virtually the same than what we did with the proximity sensor, just with another sensor, and you get rid of the leading minus (the *-* in previous *-10*) on the value of the sensor since it's an attraction, and not a repulsion. Try it on your own.
 
-You'll see your robot is attracted from a bit too far away. Let's put a cap on the attraction of the light. Have an idea how? Yep, with a conditional testing. Try it on your own, and if you need, below is a proposed solution.
+Below is a proposed solution with an added bonus. You'll see your robot is attracted from a bit too far away. Let's put a cap on the attraction of the light. Have an idea how? Yep, with a conditional testing.
+
+
+First we create a function for getting the avoidance force:
+
+```lua
+
+function lightForce()
+    avoidanceForce = {x = 0, y = 0}
+    for i = 1,24 do
+        -- We cap the value if too low
+        val = robot.light[i].value
+        if(val < 0.5) then
+            val = 0
+        end
+    
+        -- "+30" for a strong attraction 
+        v = +30 * val 
+        a = robot.light[i].angle
+
+        sensorForce = {x = v * math.cos(a), y = v * math.sin(a)}
+        lightAttractionForce.x = lightAttractionForce.x + sensorForce.x
+        lightAttractionForce.y = lightAttractionForce.y + sensorForce.y
+    end
+    return lightAttractionForce
+end
+```
+
+Then we use it in a whole behaviour:
 
 ```lua
 sumForce = { x = 0, y = 0}
 
-for i = 1,24 do
-    -- Same than previously, without the minus
-    v = robot.light[i].value * 10
-    a = robot.light[i].angle
+-- Avoiding physical object
+avoidanceForce = avoidForce()
+sumForce.x = sumForce.x + avoidanceForce.x
+sumForce.y = sumForce.y + avoidanceForce.y
 
-    fLight = {x = v * math.cos(a), y = v * math.sin(a)}
-    sumForce.x = sumForce.x + fLight.x
-    sumForce.y = sumForce.y + fLight.y
-end
+-- Going toward the light
+lightGoingForce = lightForce()
+sumForce.x = sumForce.x + lightGoingForce.x
+sumForce.y = sumForce.y + lightGoingForce.y
 
-randomForce = randForce(5)
+-- Random walk
+randomForce = randForce(35)
 sumForce.x = sumForce.x + randomForce.x
 sumForce.y = sumForce.y + randomForce.y
 
@@ -143,5 +168,5 @@ speedFromForce(sumForce)
 ```
 
 
-##d) ==Free for all== 
+##d) ==Follow the line==
 Same than previously, no time yet to create the game...
