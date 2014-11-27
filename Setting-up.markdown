@@ -64,12 +64,15 @@ While you might not have to use any of both, those two places will be of great h
 
 
 ##e) Artificial Intelligence
+--Will come later--
 Entity/function, many many stuff...
 
 
 ##f) Embodiment
+--Will come later--
 robot (actuator/sensor & brain)
 
 
 ##g) Swarm Robotics
+--Will come later--
 (local sensing, emphasis on interaction among robots, heterogeneity)
