@@ -6,7 +6,7 @@ num: 1
 
 The way you command anything that move is linked with the actuators responsible for its moving. You won't control a car, a 4 leg robot or a rocket the same way. In this section we'll discover how to command your robot, and build better ways to do so.
 
-<img src="./assets/marxbot.jpg" alt="picture of the marxbot" style="height:300px; float:right;">
+<img src="./assets/marxbot.jpg" alt="picture of the marxbot" style="height:300px; float:right; margin:10px;">
 
 ## a) One robot, two wheels
 Actually, they are "treels", some neologism between wheels and trails. But for all your concern, you can see the robot as a segway: two wheels along the horizontal axis.
