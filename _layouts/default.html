@@ -45,14 +45,14 @@
         </div>
 
 	<!-- Contect of the page (from Markdown files) -->
-        <div class="main">
+        <div class="main" id="p_center">
             {{ content }}
         </div>
 
       </div>
 
       <!-- Footer -->
-      <div class="footer">
+      <div class="footer" id="p_menu">
           <p>© {% for author in site.data.authors %} <a href="{{ site.baseurl }}/about.html#{{ author.firstname }}">{{ author.firstname }} {{ author.lastname }}, </a> {% endfor %} <a href="http://www.opentechschool.org">OpenTechSchool</a> || Licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>
           </p>
       </div>
