@@ -124,7 +124,7 @@ First we create a function for getting the avoidance force:
 ```lua
 
 function lightForce()
-    avoidanceForce = {x = 0, y = 0}
+    lightAttractionForce = {x = 0, y = 0}
     for i = 1,24 do
         -- We cap the value if too low
         val = robot.light[i].value
