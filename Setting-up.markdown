@@ -40,19 +40,14 @@ You will find in the simulator a view of your arena on the centre, two text area
 
 In the Lua code editor, you will find that there is some functions defined, characterising a code structure. As already well explained in the comments, they are:
 
-* **init** : launch once at the creation of the robots
-* **step** : launch at each step of the experiment
-* **reset** : launch when the reset button is pressed
-* **destroy** : launch at the end of the experiment
+* **init** called once at the creation of the robots
+* **step** called at each step of the experiment
+* **reset** called when the reset button is pressed
+* **destroy** called at the end of the experiment
 
 Let's launch our first experimentation to better understand what's happening. On top of all the power of Lua, ARGoS provide you with a specific container, adequately called `robot`. Anything robot related (sensor & actuator) will go through it. Type inside the step function the following line :
 
 ```Lua
-log("Hello, my name is " .. robot.id)
-```
-
-
-```lua
 log("Hello, my name is " .. robot.id)
 ```
 
