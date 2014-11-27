@@ -108,7 +108,7 @@ ul, ol {
   display: inline-block;
   width: 23%;
   min-width: 170px;
-  margin: 2em 3% 0 0;
+  margin: 2em 3% 10px 0;
   padding: 2%;
   vertical-align: top;
   font-size: 15px;
