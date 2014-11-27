@@ -80,7 +80,7 @@ function speedFromForce(f)
     forwardSpeed = f.x * 1.0
     angularSpeed = f.y * 0.3
 
-    leftSpeed   = forwardSpeed - angularSpeed
+    leftSpeed  = forwardSpeed - angularSpeed
     rightSpeed = forwardSpeed + angularSpeed
 
     robot.wheels.set_velocity(leftSpeed,rightSpeed)
@@ -108,7 +108,7 @@ Try to think on how to bring together all those Lego bricks to get the random wa
 angle = robot.random.uniform(- math.pi/2, math.pi/2)
 
 randForce = {x = 35 * math.cos(angle),
-                     y = 35 * math.sin(angle) }
+             y = 35 * math.sin(angle) }
 
 speedFromForce(randForce)
 ```
