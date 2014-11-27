@@ -27,7 +27,7 @@ forwardSpeed = 10
 angularSpeed = 1
 
 -- We have an equal component, and an opposed one   
-leftSpeed   = forwardSpeed - angularSpeed
+leftSpeed  = forwardSpeed - angularSpeed
 rightSpeed = forwardSpeed + angularSpeed
 
 robot.wheels.set_velocity(leftSpeed,rightSpeed)
@@ -65,7 +65,7 @@ force = {x =10, y=5}
 forwardSpeed = force.x * 1.0
 angularSpeed = force.y * 0.3
 
-leftSpeed   = forwardSpeed - angularSpeed
+leftSpeed  = forwardSpeed - angularSpeed
 rightSpeed = forwardSpeed + angularSpeed
 
 robot.wheels.set_velocity(leftSpeed,rightSpeed)
