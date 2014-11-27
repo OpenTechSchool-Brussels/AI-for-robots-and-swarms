@@ -2,131 +2,141 @@
 layout: default
 title:  "Making sense of it"
 num: 2
-
 ---
 
-While randomly rushing in the wall has its fun, in order to display a more intelligent behavior, your robot needs to sense its environnement. Lucky you, that's what we're going to learn now!
+While randomly rushing in the wall has its fun, let's use a few sensor so we can link the actions of our robots with what it perceives.
 
-##a) Having both wheels on the ground
-Not only does that implies a realistic understanding, but also the capacity to sense this ground. Here we'll do the later!
+##a) Looking at your feet
+Or at least in the same direction: in this section, we'll see how the robot can detect gray level on the grounds. While not a super sexy super power, it's very useful to realise you're in a specific location.
 
-The grounds sensors are 4 sensors on the lower part of the robot, aiming at the ground, in order to read its brightness. They output a value between 0 and 1; 0 for black and 1 for white, shade of gray in between.
+<img src="./assets/robot_motor_ground.png" alt="ground sensor" style="float:right; margin:10px;">
 
-![ground sensor](./assets/robot_motor_ground.png)
+The robot have 4 grounds sensors on its lower part, each reading the brightness of the ground under them. They output a value between 0 and 1; 0 for black and 1 for white, shades of gray for values in between.
 
-In our case, those readings contains a table composed of *value* an *offset*. The value refers to the brightness, and the offset to a vector for the position of the specific sensor stemming from the center of the robot:
-
-```lua
-    log("----")
-    for i = 1,4 do
-        log(robot.motor_ground[i].value)
-        log(robot.motor_ground[i].offset.x .. " " .. robot.motor_ground[i].offset.y)
-    end
-```
-
-This sensors allows you to localise place of interest in the arena. Can you imagine a code that would make your robots converge toward on dark spot on the arena ? Believe it or not, you have every tool needed! If your curious, below is a potential solution.
+Each readings is a table composed of *value* an *offset*. The value refers to the brightness and the offset to a vector for the position of the specific sensor stemming from the centre of the robot. Since we have 4 sensors, we have 4 of those readings. They are all contained in the `robot.motor_ground` table and can be accessed as follow:
 
 ```lua
-    -- Sense Ground
-    valGround = 0
-    for i = 1,4 do
-        valGround = valGround + robot.motor_ground[i].value
-    end
-    
-    -- Act upon the information
-    if(valGround <= 2) then
-        -- Stop when at least two sensors sense black
-        robot.wheels.set_velocity(0,0)
-        force = {x = 0, y = 0}    
-    else
-        -- Random walk to explore
-        force = randForce(35)
-    end
-
-    -- Update speed with generated force
-    speedFromForce(force)
+log("----")
+for i = 1,4 do
+    log(robot.motor_ground[i].value)
+    log(robot.motor_ground[i].offset.x .. " " ..
+        robot.motor_ground[i].offset.y)
+end
 ```
+You might see dark spot on the area. Can you imagine a code that makes your robots converge on those? Believe it or not, you have every tool needed! Try your hands on a solution. If your curious, below is a potential solution.
 
-Let's see now how to interact with physical objects.
+```lua
+-- Sense Ground
+valGround = 0
+for i = 1,4 do
+    valGround = valGround + robot.motor_ground[i].value
+end
+
+-- Act upon the information
+if(valGround <= 2) then
+    -- Stop when at least two sensors sense black
+    robot.wheels.set_velocity(0,0)
+else
+    -- Random walk to explore
+    speedFromForce( randForce(35) )
+end
+```
 
 ##b) Invisible touch
 
-In order to detect object around them, the robots are equipped with proximity sensors, 24 of them, spread in a ring aroung the robot body. Each sensor has a range of 10cm and returns a reading composed of an *angle* in radians and a *value* between 0 and 1. The angle defines the position of the sensors, and the value is as high as the object is close (0 means nothing is detected). The table containing those readings is `robot.proximity`
+<img src="./assets/robot_proximity.png" alt="proximity sensor" style="float:right; margin:10px;">
 
-![proximity](./assets/robot_proximity.png)
+In order to detect object around them, the robots are equipped with proximity sensors that reacts to physical object on a 10cm range. There are 24 of them, spread in a ring around the robot body. 
 
-Here is an example of reading, for logging purpose:
+Each readings is a table composed of an *angle* in radians and a *value* between 0 and 1. The angle defines the position of the sensors and the value is as high as the object is close (0 means nothing is detected). They are all contained in the `robot.proximity` table and can be accessed as follow:
 
 ```lua
-    log("----")
-    for i = 1,24 do
-        log(robot.proximity[i].angle)
-        log(robot.proximity[i].value)
-    end
+log("----")
+for i = 1,24 do
+    log("Angle: " .. robot.proximity[i].angle ..
+        "Value: " .. robot.proximity[i].value)
+end
 ```
 
-On of the most common usage (but not the only one) for the proximity sensors is to avoid obstacles (would that be object on the path, or other robots). This one will be a bit tougher than previous example. Can you imagine how to do so? We reuse the force paradigm we had previously, but now we have many forces, one per readings. If I detect an object, I should not be attracted to it (as previous forces worked) but repulsed by it. So, one repulsion force per reading, you sum them up, add the random force, and then process the force to caluculate the speed. Hell, things are starting to get serious! Try to create the behavior by yoursel, and if you're get stuck, below is a working solution.
+On of the most common usage for the proximity sensors is to avoid obstacles (object, walls, other robots...). For that, we need to create a repulsion force for each reading, as strong as its value, then sum them together and apply the force. Try to think of a way to do it or even code it on your own, this is how you'll really progress.If you're stuck, below is a proposed solution.
+
+First we create a function for getting the avoidance force:
 
 ```lua
-    sumForce = { x = 0, y = 0}
-
+function avoidForce(val)
+    avoidanceForce = {x = 0, y = 0}
     for i = 1,24 do
-        -- A "-" because it's repulsion force
-        -- and "* 10" to make the force stronger 
-        v = - robot.proximity[i].value * 10 
+        -- "-10" for a strong repulsion 
+        v = -10 * robot.proximity[i].value 
         a = robot.proximity[i].angle
 
-        fAvoidance = {x = v * math.cos(a), y = v * math.sin(a)}
-        sumForce.x = sumForce.x + fAvoidance.x
-        sumForce.y = sumForce.y + fAvoidance.y
+        sensorForce = {x = v * math.cos(a), y = v * math.sin(a)}
+        avoidanceForce.x = avoidanceForce.x + sensorForce.x
+        avoidanceForce.y = avoidanceForce.y + sensorForce.y
     end
-
-    randomForce = randForce(35)
-    sumForce.x = sumForce.x + randomForce.x
-    sumForce.y = sumForce.y + randomForce.y
-
-    speedFromForce(sumForce)
+    return avoidanceForce
+end
 ```
 
-You might as well create a function for the avoidance part of the code, returning a force, as for the `randForce(val)` function. I'll let you do that one!
+Then we use it in a whole behaviour:
+
+```lua
+sumForce = { x = 0, y = 0}
+
+-- Avoiding physical object
+avoidanceForce = avoidForce()
+sumForce.x = sumForce.x + avoidanceForce.x
+sumForce.y = sumForce.y + avoidanceForce.y
+
+-- Random walk
+randomForce = randForce(35)
+sumForce.x = sumForce.x + randomForce.x
+sumForce.y = sumForce.y + randomForce.y
+
+speedFromForce(sumForce)
+```
+
+Now we're getting somewhere!
 
 ##c) There shall be light
-You reach nowhere in life if all you do is avoiding stuff. This is why in this section we'll play with the light sensors, which usualy robots (as insects) loooove to go toward.
+This is why in this section we'll play with the light sensors, which usualy robots (as insects) loooove to go toward.
 
 The light sensor is working pretty much like the proximity sensors. 24 sensors all around the robot in circle, readings in the table `robot.light` with *value* and *angle* as keys. The neutral value, 0, means that no lights are detected, the value increase up until 1 when the light is closer to the robot.
 
-![proximity](./assets/robot_light.png)
+<img src="./assets/robot_light.png" alt="light sensor" style="float:right; margin:10px;">
 
 The example for logging purpose is pretty much the same:
 
 ```lua
-    log("----")
-    for i = 1,24 do
-        log(robot.light[i].angle)
-        log(robot.light[i].value)
-    end
+log("----")
+for i = 1,24 do
+    log("Angle: " .. robot.light[i].angle ..
+        "Value: " .. robot.light[i].value)
+end
 ```
 
-So, let's move toward the light. Have an idea of how to do that? You can base your code on the avoidance code. It's the same, more or less minus one thing. Below is a proposed solution.
+So, let's move toward the light. It's actually virtually the same than what we did with the proximity sensor, just with another sensor, and you get rid of the leading minus (the *-* in previous *-10*) on the value of the sensor since it's an attraction, and not a repulsion.
+
+You'll see your robot is attracted from a bit too far away. Let's put a cap on the attraction of the light. Have an idea how? Yep, with a conditional testing. Try it on your own, and if you need, below is a proposed solution.
 
 ```lua
-    sumForce = { x = 0, y = 0}
+sumForce = { x = 0, y = 0}
 
-    for i = 1,24 do
-        -- Same than previously, without the minus
-        v = robot.light[i].value * 10
-        a = robot.light[i].angle
+for i = 1,24 do
+    -- Same than previously, without the minus
+    v = robot.light[i].value * 10
+    a = robot.light[i].angle
 
-        fLight = {x = v * math.cos(a), y = v * math.sin(a)}
-        sumForce.x = sumForce.x + fLight.x
-        sumForce.y = sumForce.y + fLight.y
-    end
+    fLight = {x = v * math.cos(a), y = v * math.sin(a)}
+    sumForce.x = sumForce.x + fLight.x
+    sumForce.y = sumForce.y + fLight.y
+end
 
-    randomForce = randForce(5)
-    sumForce.x = sumForce.x + randomForce.x
-    sumForce.y = sumForce.y + randomForce.y
+randomForce = randForce(5)
+sumForce.x = sumForce.x + randomForce.x
+sumForce.y = sumForce.y + randomForce.y
 
-    speedFromForce(sumForce)
+speedFromForce(sumForce)
 ```
 
 
