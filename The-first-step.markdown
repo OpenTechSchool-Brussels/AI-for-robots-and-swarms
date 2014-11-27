@@ -53,7 +53,9 @@ sum = force.x + force.y
 
 <img src="./assets/robot_wheels.png" alt="picture of the differential drive" style="float:right; margin:10px;">
 
-If you look at the reference on the right, you will see that in order to have a coherent 3D axis, and a z going through the robot in the up direction, we ended up have the x axis vertical forward and the y axis horizontal left. This means that the *force.x* component of the force will impact forward/backward movement (force.x > 0 implies forward movement) and the *force.y* component will impact turning (force.y > 0 implies turning on the left, since the y axis goes toward the left). All in all, here it how it looks like in code:
+If you look at the reference on the right, you will see that in order to have a coherent 3D axis, and a z going through the robot in the up direction, we ended up have the x axis vertical forward and the y axis horizontal left. This means that the *force.x* component of the force will impact forward/backward movement (force.x > 0 implies forward movement) and the *force.y* component will impact turning (force.y > 0 implies turning on the left, since the y axis goes toward the left).
+
+All in all, here it how it looks like in code:
 
 ```lua
 force = {x =10, y=5}
