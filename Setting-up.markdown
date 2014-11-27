@@ -13,13 +13,13 @@ First of all, we need to install our environment. Since ARGoS depends on Lua, in
 **On Linux**
 
 * Download the package [here](http://bohr.ulb.ac.be/~pincy/argos/core.php).
-* Install the package. Open a terminal where you downloaded the pakage and type: `dpgk -i _FileName_` where `_FileName_` is indeed the name of the package you just downloaded.
+* To install the package, open a terminal where you downloaded the pakage and type: `dpgk -i _FileName_` where `_FileName_` is indeed the name of the package you just downloaded.
 
 **On Mac**
 
 * Using Brew as can be read [here](http://bohr.ulb.ac.be/~pincy/argos/core.php).
 
-In order to check if ARGoS is well installed, just type `argos3 --version`, a green text should appearing with the version name of currently installed ARGoS.
+In order to check if ARGoS is well installed, just type `argos3 --version`, a green text should appear with the version name of currently installed ARGoS.
 
 ##b) ARGoS Simulator
 ARGoS is a multi-physics robot simulator easily customizable by adding new plug-ins. It can simulate large-scale swarms of robots of any kind efficiently. Its accuracy aims to be as close as possible to real simulation, making it the perfect first step before porting your code on real robot.
