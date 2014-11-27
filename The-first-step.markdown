@@ -18,9 +18,9 @@ Try to play with varying speed for each wheels, and espcially, try to make your 
 ## b) Forward speed & angular speed
 So, if you tryed already to give more complex navigational behavior from this simple function, you'll realise it's not the most straight forward way to code the moving of the robot. You might rather want to pilote your robot as you would pilote a car: thinking in terms of moving forward/backward and turning would already be a step forward, and one we'll make right now.
 
-How to know what values to feed both wheels when you know the forward speed and angular speed? This depends on the way your robot move, and in our case, with those two wheels, it's defined by a system called differential drive.
+<img src="./assets/robot_wheels.png" alt="picture of the differential drive" style="float:right; margin:10px;">
 
-![differential drive](./assets/robot_wheels.png)
+How to know what values to feed both wheels when you know the forward speed and angular speed? This depends on the way your robot move, and in our case, with those two wheels, it's defined by a system called differential drive.
 
 If you did previous step experiment, you'll have seen that moving forward means having same speed on both wheels, while turning on yourself implies having oposite speed. In our case we'll just combine the two in order to have the full behavior (moving forward/backward & turning).
 
