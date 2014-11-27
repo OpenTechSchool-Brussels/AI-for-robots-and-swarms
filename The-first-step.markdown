@@ -4,8 +4,6 @@ title:  "Let's get rolling"
 num: 1
 ---
 
-INTRO = GAME as objective, and setup files.
-
 Basic rule of life: if you don't move, things are going to get pretty hard up the road... Now different creature and inventors found various way to solve that issue. Those answers doesn't work the same way, you don't control a car, a 4 leg robot or a rocket the same way. In this section we'll discover how to make your robot move and then we'll create better way to command it.
 
 <img src="./assets/marxbot.jpg" alt="picture of the marxbot" style="height:300px; float:right; margin:10px;">
