@@ -66,8 +66,8 @@ First we create a function for getting the avoidance force:
 function avoidForce()
     avoidanceForce = {x = 0, y = 0}
     for i = 1,24 do
-        -- "-30" for a strong repulsion 
-        v = -30 * robot.proximity[i].value 
+        -- "-100" for a strong repulsion 
+        v = -100 * robot.proximity[i].value 
         a = robot.proximity[i].angle
 
         sensorForce = {x = v * math.cos(a), y = v * math.sin(a)}
