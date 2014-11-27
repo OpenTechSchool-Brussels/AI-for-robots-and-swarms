@@ -12,8 +12,8 @@ var addEvent = function(elem, type, eventHandle) {
 
 addEvent(window, "resize", function() {
                         
-                        alert("d width =" + window.document.width);
-                          if(document.width > 702) {
+                        alert("d width =" + window.innerWidth);
+                          if(window.innerWidth > 702) {
                             document.getElementById(p_menu).style.width ="100%";
                             document.getElementById(p_content).style.width = "100%";
                           } else {
