@@ -73,5 +73,99 @@ Once you have this function, call it (with the parameters you want, like `camFor
 ##c) Finite State Automaton
 In life, people are not so simple to display only one personality, and robot aren't either. One way to model such variety in personality is to use [Finite State Automaton](http://en.wikipedia.org/wiki/Finite-state_machine) (FSA). All in all, they are just series of states with transitions that links them together.
 
+In Lua, that means creating a global table of states, a global value for the current state, and one function for each state (yay, clean code!). In those function, you will have both the behaviour and the transitions.
+
+As an example, let's have a robot that oscillate between lover, coward and random walk.
+
+```lua
+-- Define the global state and the table of behaviours
+myState = "random_walk"
+state = {}
+
+-- Defines the three behaviours
+
+function state.random_walk()
+       -- Behavior
+
+	sumForce = { x = 0, y = 0}
+	-- Random force
+   randomForce = randForce(35)
+	sumForce.x = sumForce.x + randomForce.x
+	sumForce.y = sumForce.y + randomForce.y
+
+	-- Avoiding physical object
+	avoidanceForce = avoidForce()
+	sumForce.x = sumForce.x + avoidanceForce.x
+	sumForce.y = sumForce.y + avoidanceForce.y
+
+	speedFromForce(sumForce)
+
+   -- Transition
+    if(#robot.colored_blob_omnidirectional_camera > 0 and
+        robot.colored_blob_omnidirectional_camera[1].distance > 50) then
+        myState = "lover"
+    end
+
+end
+
+function state.lover()
+       -- Behavior
+
+	sumForce = { x = 0, y = 0}
+	-- Light force
+	camForce = cameraForce(true,true)
+	sumForce.x = sumForce.x + camForce.x
+   sumForce.y = sumForce.y + camForce.y
+
+	-- Avoiding physical object
+	avoidanceForce = avoidForce()
+	sumForce.x = sumForce.x + avoidanceForce.x
+	sumForce.y = sumForce.y + avoidanceForce.y
+
+	speedFromForce(sumForce)
+
+   -- Transition
+    if(#robot.colored_blob_omnidirectional_camera == 0) then
+        myState = "random_walk"
+    elseif(robot.colored_blob_omnidirectional_camera[1].distance <20) then
+        myState = "coward"
+    end
+end
+
+function state.coward()
+       -- Behavior
+
+	sumForce = { x = 0, y = 0}
+	-- Light force
+	camForce = cameraForce(true,true)
+	sumForce.x = sumForce.x + camForce.x
+   sumForce.y = sumForce.y + camForce.y
+
+	-- Avoiding physical object
+	avoidanceForce = avoidForce()
+	sumForce.x = sumForce.x + avoidanceForce.x
+	sumForce.y = sumForce.y + avoidanceForce.y
+
+	speedFromForce(sumForce)
+
+   -- Transition
+    if(#robot.colored_blob_omnidirectional_camera == 0) then
+        myState = "random_walk"
+    else
+	     if(robot.colored_blob_omnidirectional_camera[1].distance > 80) then
+            myState = "random_walk"
+        end
+    end
+end
+
+-- Which gives us a pretty simple step function
+function step()
+    state[myState]()
+end
+
+```
+
+From now on, you can couple whatever you just learn and create complex series of behaviours. Not just anymore a robot with reflexes but a well fitted artificial intelligence!
+
 ##c) Coupling behaviours
 test on id to have different behaviours.
