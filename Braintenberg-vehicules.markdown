@@ -165,7 +165,22 @@ end
 
 ```
 
-From now on, you can couple whatever you just learn and create complex series of behaviours. Not just anymore a robot with reflexes but a well fitted artificial intelligence!
+From now on, you can combine whatever you just learn and create complex series of behaviours. Not just anymore a robot with reflexes but a well fitted artificial intelligence!
 
 ##c) Coupling behaviours
-test on id to have different behaviours.
+While those vehicles are already amazing by themselves, its robotic, not swarm robotic. But did you see what we did? We used the omnidirectional camera to check on the light. We can use it to check on beacons too, and have robots interacting together this way!
+
+Possibilities are endless here so we will leave you the making as an exercise. Can you imagine robots playing tag? What kind of behaviour would fit better the robot that is chasing the others? What behaviour for the one that escape? You can here have a nice life simulation and reuse game rules from the real world and apply them to robotics.
+
+You might wonder how to have many robots with different behaviour. You could have different code for each robot (the clean way) but the quicker one would be to select the behaviour based on the robot's id. Want only one robot to chase the others ? Than make the robot with id equals 1 having a particular behaviour. Let's see how it works if we want a half-coward and half-lover swarm.
+
+```lua
+-- In step function
+if( math.fmod(robot.id,2) == 0) then -- Check if even 
+    state("lover")
+else
+    state("coward")
+end
+```
+
+Tadam! Now you have everything to create complex teams and strategy to apply to real life games.
