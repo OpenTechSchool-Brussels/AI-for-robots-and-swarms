@@ -83,8 +83,8 @@ if(#robot.colored_blob_omnidirectional_camera > 0) then
 end
 ```
 
-This code when you have a well mixed population. If it's not the case, you will still see some osciltions between groups of robots.
+This code works better when you have a well mixed population. If it's not the case, you might see some oscillations between groups of robots.
 
 ##d) ==Beuuuuuu==
-Since the workshop basicaly finish there, let me propose you a little bonus. Try to have robots interact together based on the Braintenberg Vehicules four behaviours. Light up some (all?) robots' beacons, and port the code that reacted to light to now use the camera blob detection. Make a robot in love with a coward, see how it goes! Couple two agressors and an explorator... Create little community of each, triggered by different colors... A lot to be done as experiment in artificial lifes!
+Since the workshop basically finish there, let me propose you a little bonus. Try to have robots interact together based on the Braintenberg Vehicules four behaviours. Light up some (all?) robots' beacons, and port the code that reacted to light to now use the camera blob detection. Make a robot in love with a coward, see how it goes! Couple two aggressors and an explorator... Create little community of each, triggered by different colours... A lot to be done as experiment in artificial lives!
 
