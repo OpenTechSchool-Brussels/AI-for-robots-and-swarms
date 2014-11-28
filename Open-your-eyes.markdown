@@ -1,7 +1,7 @@
 ---
 layout: default
 title:  "Open your eyes"
-num: 4
+num: 3
 ---
 
 Up until now we discovered sensors and actuators of robots which created mainly isolated behaviours. In this section, we'll see the coupling LEDs & camera in order to get a first taste of swarm behaviour.
