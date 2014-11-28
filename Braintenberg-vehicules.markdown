@@ -1,8 +1,7 @@
 ---
 layout: default
 title:  "Braintenberg Vehicules"
-num: 3
-
+num: 4
 ---
 
 I confess a particularly strong love for those so called vehicules. Spawning from the realm of cybernetics (no kidding), those vehicules demonstrate a few things. First, you don't need complexe algorithm to have an interesting behavior. And most importantly, you don't need a complexe behavior displayed for humans (and animals) to project high cognition an assume the robot is more intelligent (or even sentient) than he really is. This is to say a lot about how actually we might project way too much on the sentient level while observing other humans...
