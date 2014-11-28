@@ -32,7 +32,7 @@ The environment code (loop functions) will be given to you when needed, nothing 
 
 
 ##c) Your first code
-Let's release the beast. In order to launch ARGoS, you need to write in the command line `argos3 -c _expSetup_` where `_expSetup_` is your experimental setup file (the .argos file) and the c in the `-c` flag stands for configuration. [Here]() is the test file we'll be using in this section. Download the file, and type `argos3 -c setup.argos` where you put it.
+Let's release the beast. In order to launch ARGoS, you need to write in the command line `argos3 -c _expSetup_` where `_expSetup_` is your experimental setup file (the .argos file) and the c in the `-c` flag stands for configuration. [Here](./assets/code/test.argos) is the test file we'll be using in this section and [here](./assets/code/one_spot.png) is the accompagned picture for the floor. Download both files, and type `argos3 -c setup.argos` where you put them.
 
 You should see two new windows appearing. One is a text editor (where you will type your Lua code and execute it), the other one is the ARGoS simulator itself.
 
