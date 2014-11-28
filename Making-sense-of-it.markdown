@@ -127,8 +127,9 @@ function lightForce()
     lightAttractionForce = {x = 0, y = 0}
     for i = 1,24 do
         -- We cap the value if too low
+        -- you can modify the threshold
         val = robot.light[i].value
-        if(val < 0.5) then
+        if(val < 0.4) then
             val = 0
         end
     
