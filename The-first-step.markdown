@@ -41,7 +41,7 @@ Orders can be seen as forces (attraction: go there, repulsion: avoid that) and f
 
 ```Lua
  -- Define your table/vector/force
-force = { x = 0, y = 0}`.
+force = { x = 0, y = 0}
 
 -- Setting up table/vector/force values
 force.x = 10
