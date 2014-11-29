@@ -14,6 +14,7 @@ First of all, we need to install our environment. Since ARGoS depends on Lua, in
 
 * Download the package [here](http://bohr.ulb.ac.be/~pincy/argos/core.php).
 * To install the package, open a terminal where you downloaded the pakage and type: `dpgk -i _FileName_` where `_FileName_` is indeed the name of the package you just downloaded.
+* Then, type `sudo apt-get -f install` (which will ask for your password) and you should be done with it.
 
 **On Mac**
 
