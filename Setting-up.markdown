@@ -10,6 +10,7 @@ So, before creating [robots discarding collected intel and driving into walls](h
 In order to simulate both our robots and their environment, we'll use ARGoS, a multi-physics robot simulator easily customizable by adding new plug-ins. It can efficiently simulate large-scale swarms of robots. Its accuracy aims to be as close as possible to real simulation. It's a tool created with research in mind and used all around the world in laboratories. While we will use it as an educational tool and later as a gaming platform, its constrains & quality are the same than such that would be required by a professional and research environment. In short: whatever you will create here will have real sense. If your behaviour is getting amazing result on a task, be ready to publish about it, yay!
 
 ARGoS takes three things as entry points:
+
 * the robot brain (either C++ code or Lua code);
 * an environment code (only in C++), either to update the environment's information (like adding objects) or to add more visuals;
 * a .argos (XML) file describing the experimental conditions.
