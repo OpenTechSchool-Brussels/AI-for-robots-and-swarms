@@ -53,7 +53,8 @@ Apart from the classic text editor functionality, you'll see on the right end a 
 Now a bit of Lua. There is scope for variables. If you want a variable to work as some global memory of your robot, you need to make it global by defining it at the top of your code (not in a function). You'll see that Lua has only one container type, *tables*, being associative arrays. They store a set of key/value pairs. (Imagine an array that you can access not only with numbers, and if with numbers, not necessarily in a straight order). As mentioned earlier, to (re)discover Lua and understand better this notion of table, you might want to check our [reference page](./ref_lua.html).
 
 If you're curious to know more about the end user possibilities of ARGoS, you can explore them from the command line with `argos3 -q _Something_` (q standing for query). `_Something_` can be either `all` if you want info on everything, or the name of sensors, actuators, type of objects in the arena, name of your favourite restaurant... And then again, you still have the other [reference page](./ref_argos.html).
-<!--
+
+<!---
 ##e) Artificial Intelligence
 --Will come later--
 Entity/function, many many stuff...
