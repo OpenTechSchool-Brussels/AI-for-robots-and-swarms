@@ -39,8 +39,10 @@
 
             <a href="{{ site.baseurl }}/about.html">About</a>
 	    <center><hr width="60%"/></center>
-            <a href="{{ site.baseurl }}/ref_lua.html">Ref Lua</a>
-            <a href="{{ site.baseurl }}/ref_argos.html">Ref ARGoS</a>
+            <ul>
+            	<li><a href="{{ site.baseurl }}/ref_lua.html">Ref Lua</a></li>
+            	<li><a href="{{ site.baseurl }}/ref_argos.html">Ref ARGoS</a></li>
+            </ul>
 	    <center><hr width="60%"/></center>
             <p class="madeBy">
                 Course by {% for author in site.data.authors %} <a href="{{ site.baseurl }}/about.html#{{ author.firstname }}"> {{ author.firstname }} </a> {% unless forloop.last %} & {% endunless %} {% endfor %} for <a href="http://www.opentechschool.org/brussels/">OTS Brussels</a>
