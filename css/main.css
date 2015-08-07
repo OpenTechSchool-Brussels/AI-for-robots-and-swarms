@@ -224,3 +224,35 @@ pre a:only-of-type::before {
 .authorName{
   font-weight:bold;
 }
+
+      table#main{
+      background-color: white;
+      width: 700px;
+      text-align: center;
+      }
+
+      table#contact td{
+      padding: 2px 20px 0px 0px;
+      text-align: left;
+      }
+
+      table dt {
+      font-weight: bold;
+      }
+
+      table.code {
+      margin-top: 15px;
+      }
+
+      table.code tr.even {
+      background-color: #DDDDDD;
+      }
+
+      table.code td {
+      padding: 10px 10px;
+      border: 1px solid black;
+      }
+
+      table.code td.category {
+      font-weight: bold;
+      }
