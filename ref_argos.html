@@ -1,0 +1,230 @@
+---
+layout: default
+title:  "Reference ARGoS"
+---
+
+<div>
+
+                NOTE: don't modify the values of the <code>robot</code> attributes. More specifically:
+              </p>
+              <ul style="font-weight:bold">
+	              <li>Never write directly into the <code>robot</code> attributes
+                  <ul>
+                    <li><code>robot.proximity[4].angle = 1.67 -- NO!</code>
+                  </ul>
+	              <li>Never apply operations such as <code>table.sort()</code> to the <code>robot</code> table
+                  <ul>
+                    <li><code>table.sort(robot.proximity, function(a,b) return a.value > b.value end) -- NO!</code>
+                  </ul>
+	              <li>If you intend to use the values of a <code>robot</code> table, copy that table first:
+                  <ul>
+                    <li><code>myprox = table.copy(robot.proximity)</code>
+                    <li><code>table.sort(myprox, function(a,b) return a.value < b.value end)</code>
+                  </ul>
+              </ul>
+	            <table class="code">
+		            <tr class="even">
+		              <td><code>robot.base_ground</code></td>
+		              <td>
+		                The base ground sensor reads the color of the floor.
+		                It is a list of 8 readings, each containing a table composed of
+		                <code>value</code> and <code>offset</code>. The value is either 0 or 1, where
+		                0 means black (or dark gray), and 1 means white (or light gray). The offset
+		                corresponds to the position read on the ground by the sensor. The position is
+		                expressed as a 2D vector stemming from the center of the robot. The vector
+		                coordinates are in cm.<br>
+				The difference between this sensor and the <code>robot.motor_ground</code> is
+				that this sensor returns binary readings (0 = black/1 = white), while
+				<code>robot.motor_ground</code> can distinguish different shades of gray.
+		              </td>
+                  <td><img src="robot_base_ground.png"></td>
+		            </tr>
+		            <tr class="odd">
+		              <td><code>robot.distance_scanner</code></td>
+		              <td>
+		                The distance scanner is a rotating device with four sensors. Two sensors are
+		                short-range (4cm to 30cm) and two are long-range (20cm to 150cm). Each sensor
+		                returns up to 6 values every time step, for a total of 24 readings (12 short-range
+		                and 12 long-range). Each reading is a table composed of <code>angle</code> in
+		                radians and <code>distance</code> in cm. The distance value can also be -1
+				or -2. When it is -1, it means that the object detected by the sensor is closer
+				than the minimum sensor range (4cm for short-range, 20cm for long-range). When
+				a sensor returns -2, it's because no object was detected at all.<br>
+		                This device is initially off. You need to use the <code>enable()</code> function
+		                to switch it on. The function <code>disable</code> switches it off.
+		                The function <code>set_angle()</code> locks the device at a specific angle, while
+		                <code>set_rpm(s)</code> sets the angular speed of the device to <code>s</code>
+		                (which must be a number). If you want to convert from radians per second to
+				RPMs, apply the following formula: <em>RPM</em> = 30/pi * <em>radsec</em>.
+		              </td>
+                  <td></td>
+		            </tr>
+		            <tr class="even">
+		              <td><code>robot.gripper</code></td>
+		              <td>
+		                The gripper allows a robot to connect to objects such as boxes and cylinders, or
+		                other robots. A robot attached to a passive object can transport it, if it is
+		                light enough.<br>
+		                To lock the gripper, you use <code>lock_positive()</code> or
+		                <code>lock_negative()</code>. They both do the same job, so you can call the one
+		                you prefer. To unlock the gripper (thus releasing the attached object), use
+		                <code>unlock()</code>.
+		              </td>
+                  <td><img src="robot_gripper.png"></td>
+		            </tr>
+		            <tr class="odd">
+		              <td><code>robot.id</code></td>
+		              <td>
+		                A string containing the id of the robot.
+		              </td>
+                  <td></td>
+		            </tr>
+		            <tr class="even">
+		              <td><code>robot.leds</code></td>
+		              <td>
+		                Sets the color of the robot LEDs. The robot has a total of 13 RGB LEDs. 12 of them
+		                are arranged in a ring around the robot body, and one (also called the
+		                <em>beacon</em>) is positioned at the top of the robot body.<br>
+		                To set the colors of a single LED, use <code>set_single_color(idx, color)</code>.
+		                <code>idx</code> is the number of the LED to set (1-12 for the body LEDs, 13 for
+		                the beacon). <code>color</code> can be expressed as a string, such as
+		                <code>"red"</code>, <code>"green"</code>, <code>"blue"</code>, etc., or as a
+		                triplet of numbers <code>r,g,b</code>.<br>
+		                To set all colors at once, use <code>set_all_colors(color)</code>. The
+		                <code>color</code> parameter works like <code>set_single_color(idx, color)</code>.
+		              </td>
+                  <td><img src="robot_leds.png"></td>
+		            </tr>
+		            <tr class="odd">
+		              <td><code>robot.light</code></td>
+		              <td>
+                    The light sensor allows the robot to detect light sources. The robot has 24
+                    light sensors, equally distributed in a ring around its body. Each sensor reading
+                    is composed of an <code>angle</code> in radians and a <code>value</code> in the range
+                    [0,1]. The angle corresponds to where the sensor is located in the body with respect
+                    to the front of the robot, which is the local <em>x</em> axis. Regarding the value,
+                    0 corresponds to no light being detected by a sensor, while values > 0 mean that light
+                    has been detected. The value increases as the robot gets closer to a light source.
+		              </td>
+                  <td><img src="robot_light.png"></td>
+		            </tr>
+		            <tr class="even">
+		              <td><code>robot.motor_ground</code></td>
+		              <td>
+		                The motor ground sensor reads the color of the floor.
+		                It is a list of 4 readings, each containing a table composed of
+		                <code>value</code> and <code>offset</code>. The value goes from 0 or 1, where
+		                0 means black, and 1 means white. The offset corresponds to the position read
+				on the ground by the sensor. The position is expressed as a 2D vector stemming
+				from the center of the robot. The vector coordinates are in cm.<br>
+				The difference between this sensor and the <code>robot.base_ground</code> is
+				that this sensor can distinguish different shades of gray, while
+				<code>robot.base_ground</code> returns binary readings (0 = black/1 = white).
+		              </td>
+                  <td><img src="robot_motor_ground.png"></td>
+		            </tr>
+		            <tr class="odd">
+		              <td><code>robot.proximity</code></td>
+		              <td>
+                    The proximity sensors detect objects around the robots. The sensors are 24 and are
+                    equally distributed in a ring around the robot body. Each sensor has a range of 10cm
+                    and returns a reading composed of an <code>angle</code> in radians and a <code>value</code>
+                    in the range [0,1]. The angle corresponds to where the sensor is located in the body with
+                    respect to the front of the robot, which is the local <em>x</em> axis. Regarding the value,
+                    0 corresponds to no object being detected by a sensor, while values > 0 mean that an object
+                    has been detected. The value increases as the robot gets closer to the object.
+		              </td>
+                  <td><img src="robot_proximity.png"></td>
+		            </tr>
+		            <tr class="even">
+		              <td><code>robot.random</code></td>
+		              <td>
+                    This table offers a set of functions to draw random numbers from a distribution.<br>
+                    Use <code>bernoulli()</code> to get either 0 or 1 from a
+                    <a href="http://en.wikipedia.org/wiki/Bernoulli_distribution" target="_blank">Bernoulli
+                      distribution</a> with <em>p</em>=0.5. You can also write <code>bernoulli(p)</code> to set
+                    a different value for <em>p</em>.<br>
+                    Use <code>exponential(m)</code> to get a random number from an
+                    <a href="http://en.wikipedia.org/wiki/Exponential_distribution" target="_blank">exponential
+                      distribution</a> with mean <code>m</code>.<br>
+                    Use <code>gaussian(s)</code> to get a random number from a
+                    <a href="http://en.wikipedia.org/wiki/Gaussian_distribution" target="_blank">Gaussian
+                      distribution</a> with standard deviation <code>s</code> and zero mean. You can also
+                    write <code>gaussian(s,m)</code> to set a non-zero mean.<br>
+                    Use <code>uniform()</code> to get a random number from a
+                    <a href="http://en.wikipedia.org/wiki/Uniform_distribution" target="_blank">uniform
+                      distribution</a> in the range [0,1). Alternatively, you can use <code>uniform(max)</code>
+                    to get a number between 0 and <code>max</code>, or
+                    <code>uniform(min,max)</code> to get a number between <code>min</code> and
+                    <code>max</code>. If you want <em>integer</em> numbers, use the functions
+		    <code>uniform_int(max)</code> and <code>uniform_int(min,max)</code>.
+		              </td>
+                  <td></td>
+		            </tr>
+		            <tr class="odd">
+		              <td><code>robot.range_and_bearing</code></td>
+		              <td>
+                    The range-and-bearing system allows robots to perform <em>localized communication</em>.
+                    Localized communication means that a robot, upon receiving data from another robot, also
+                    detects the position of the sender with respect to its local point of view. It is important
+                    to notice that the range-and-bearing system is not like WiFi. First, because two robots can exchange
+                    data only if they are in direct line of sight - if an object is between two robots, the robots
+                    can't communicate. Second, because robots that send data can only broadcast it in a limited area -
+                    you can't pick who you talk to as you would with an IP address. Third, the robots can exchange only
+                    10 bytes of data.<br>
+                    To set the data to broadcast, use <code>set_data()</code>. This function accepts input in two forms.
+                    You can write <code>set_data(idx, data)</code>, and this means that you set the <code>idx</code>-th
+                    byte to the value of <code>data</code>. <code>data</code> must be a number in the range [0,255].
+                    Alternatively, you can write <code>set_data(data)</code>, where <code>data</code> must be a table
+                    containing exactly 10 numbers in the range [0,255].<br>
+                    At each time step, a robot receives a variable number of messages from nearby robots. Each message
+                    is stored in a table composed of <code>data</code> (the 10-bytes message payload),
+                    <code>horizontal_bearing</code> (the angle between the robot local <em>x</em> axis and the position
+                    of the message source; the angle is on the robot's <em>xy</em> plane, in radians),
+                    <code>vertical_bearing</code> (like the horizontal bearing, but it is the angle between the message
+                    source and the robot's <em>xy</em> plane), and <code>range</code> (the distance of the message
+                    source in cm).
+		              </td>
+                  <td></td>
+		            </tr>
+		            <tr class="even">
+		              <td><code>robot.wheels</code></td>
+		              <td>
+                    The real robot moves using two sets of wheels and tracks called <em>treels</em>. For simplicity,
+                    we treat the treels like normal wheels.<br>
+                    To move the robot, use <code>set_velocity(l,r)</code> where <code>l</code> and <code>r</code> are
+                    the left and right wheel velocity, respectively. By 'wheel velocity' we mean <em>linear</em> velocity.
+                    In other words, if you say <code>set_velocity(5,5)</code>, the robot will move forward at 5cm/s.<br>
+                    You can get some information about robot motion and wheels, too. <code>axis_length</code> is the distance
+                    between the two wheels in cm. <code>velocity_left</code> and <code>velocity_right</code> store the current
+                    wheel velocity. <code>distance_left</code> and <code>distance_right</code> store the linear distance
+                    covered by the wheels in the last time step.
+		              </td>
+                  <td><img src="robot_wheels.png"></td>
+		            </tr>
+		            <tr class="odd">
+		              <td><code>robot.turret</code></td>
+		              <td>
+				The foot-bot gripper is attached to a rotating device called the <em>gripper</em>. You can control the gripper
+				by either setting its rotation, or its rotational speed. To set its rotation, you must first call the
+				method <code>set_position_control_mode()</code> to switch the gripper to position control mode, and then
+				call <code>set_rotation(angle)</code> to rotate the gripper at angle <code>angle</code>. Alternatively,
+				you can set the rotational speed by calling <code>set_speed_control_mode()</code> first, and then
+				<code>set_rotation_speed(speed)</code>. With <code>set_passive_mode()</code> you instruct the gripper
+				to be in a state in which, as the robot moves with an object gripped, the turret rotates due to the
+				weight of the gripped object.
+		              </td>
+                  <td></td>
+		            </tr>
+		            <tr class="even">
+		              <td><code>robot.colored_blob_omnidirectional_camera</code></td>
+		              <td>
+				This device returns a list of colored blobs, along with their position with respect to the robot center.
+				A colored blob in ARGoS corresponds to an LED. The list of blobs varies in size over time, depending on
+				what the robots sees. To start collecting data, you need to call <code>enable()</code>. To stop, call
+				<code>disable()</code>.
+		              </td>
+                  <td></td>
+		            </tr>
+	            </table>
+	          </div>
