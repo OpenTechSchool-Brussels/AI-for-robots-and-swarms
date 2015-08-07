@@ -2,35 +2,26 @@
 layout: default
 title:  "Setting up"
 num: 0
-
 ---
 
-All right! We're doing it :D Let's take care of the installation process so we can start messing with the robots! After making sure everything is working fine, a few paragraphs will give you a bit of context.
+So, before creating [robots discarding collected intel and driving into walls](http://bash.org/?240849), let's setup all the necessary tools and get a bit of context. Both are as necessary: one to do things, the other to understand what you're doing!
 
-##a) Setting Up ARGoS & Lua
-First of all, we need to install our environment. Since ARGoS depends on Lua, installing the former will install the later.
+##a) ARGoS Simulator
+In order to simulate both our robots and their environment, we'll use ARGoS, a multi-physics robot simulator easily customizable by adding new plug-ins. It can efficiently simulate large-scale swarms of robots. Its accuracy aims to be as close as possible to real simulation. It's a tool created with research in mind and used all around the world in laboratories. While we will use it as an educational tool and later as a gaming platform, its constrains & quality are the same than such that would be required by a professional and research environment. In short: whatever you will create here will have real sense. If your behaviour is getting amazing result on a task, be ready to publish about it, yay!
 
-**On Linux**
+ARGoS takes three things as entry points:
+* the robot brain (either C++ code or Lua code);
+* an environment code (only in C++), either to update the environment's information (like adding objects) or to add more visuals;
+* a .argos (XML) file describing the experimental conditions.
 
-* Download the package [here](http://bohr.ulb.ac.be/~pincy/argos/core.php).
-* To install the package, open a terminal where you downloaded the pakage and type: `dpgk -i _FileName_` where `_FileName_` is indeed the name of the package you just downloaded.
-* Then, type `sudo apt-get -f install` (which will ask for your password) and you should be done with it.
+The environment code (loop functions) will be given to you when needed, nothing to worry or care much about. While the .argos files will be given to you too, we will have a look at it together and you might have to change a few parameters along the way (changing the number of robots, the position of places of interest...). The files we provide are meant to be sufficiently commented for you to be able to work it out on your own. Last, and most important: the brain of the robots. This is what we'll be mainly working on in this workshop. While C++ could be used, we will focus on Lua because it makes the whole process easier. If you don't know Lua, don't worry, it's similar to classic programming language.
 
-**On Mac**
+Two references pages are provided to you (taken from reference material of Carlo Pinciroli's course on Swarm Intelligence) for both [ARGoS](./ref_argos.html) and [Lua](./ref_lua.html). Be sure to come back to them when not sure about what you're doing.
 
-* Using Brew as can be read [here](http://bohr.ulb.ac.be/~pincy/argos/core.php).
+##b) Setting Up ARGoS & Lua
+You can either install ARGoS from source or directly from packages. The later should be simpler. Only fall back to the former if you can't make it work, or if you want cutting edge code. Installation can be done on Mac and Linux, alas no possibility for Windows. To install from package, go [there](http://www.argos-sim.info/core.php); to install from source, check [here](https://github.com/ilpincy/argos3/)  
 
 In order to check if ARGoS is well installed, just type `argos3 --version`, a green text should appear with the version name of currently installed ARGoS.
-
-##b) ARGoS Simulator
-ARGoS is a multi-physics robot simulator easily customizable by adding new plug-ins. It can simulate large-scale swarms of robots of any kind efficiently. Its accuracy aims to be as close as possible to real simulation, making it the perfect first step before porting your code on real robot. ARGoS doesn't work on its own, you need to feed him 3 stuff:
-
-* the robot brain (either C++ code or, as in our case, Lua code);
-* an environment code (only in C++), either to update the world information or to add more visuals; 
-* and last, a .argos (XML) file describing the experimental setup.
-
-The environment code (loop functions) will be given to you when needed, nothing to worry or care much about. While the .argos files will be given to you too, we will refer to it sometimes and you might even want on your own to make a few modifications to the experimental setup (changing the number of robots in the arena, the position of places of interest, etc. etc. ). We hope the files we provide are sufficiently commented for you to be able to work it out on your own. Last, and most important: the brain of the robots. This is what we'll be mainly working on in this workshop.
-
 
 ##c) Your first code
 Let's release the beast. In order to launch ARGoS, you need to write in the command line `argos3 -c _expSetup_` where `_expSetup_` is your experimental setup file (the .argos file) and the c in the `-c` flag stands for configuration. [Here](./assets/code/test.argos) is the test file we'll be using in this section and [here](./assets/code/one_spot.png) is the accompagned picture for the floor. Download both files, and type `argos3 -c setup.argos` where you put them.
@@ -69,6 +60,8 @@ While you might not have to use any of both, those two places will be of great h
 Entity/function, many many stuff...
 
 
+
+
 ##f) Embodiment
 --Will come later--
 robot (actuator/sensor & brain)
@@ -77,3 +70,5 @@ robot (actuator/sensor & brain)
 ##g) Swarm Robotics
 --Will come later--
 (local sensing, emphasis on interaction among robots, heterogeneity)
+
+<p>If in a first time you will work on robots taken one by one, you will quickly learn how to create constructive interaction between robots so that won't work each on their own, but collaborate and work as one entity : a swarm.</p>
