@@ -35,10 +35,7 @@
                 {% for i in (0..site.pages.size) %} {% for post in site.pages %} {% if post.num == i %}
                     <li><a href="{{ site.baseurl }}{{ post.url }}">log_{{post.num}} {{ post.title }}</a></li>
                 {% endif %} {% endfor %} {% endfor %}
-                
-	    <center><hr width="60%"/></center>
             	<li><a href="{{ site.baseurl }}/ref_lua.html">Ref Lua</a></li>
-            	<center><hr width="60%"/></center>
             	<li><a href="{{ site.baseurl }}/ref_argos.html">Ref ARGoS</a></li>
             </ul>
 
