@@ -9,6 +9,8 @@ When dealing with a whole swarm, stuff get much more complex pretty quickly. Sim
 ##a) May the force be with you (George, don't sue us)
 So children, today we're going to learn about a new and exciting sensor! The treels, a portmanteau between wheels and déjà vu. Ok, my bad, been there done that. But not in this way. We'll learn a new paradigm of usage of those treels, one that is way more generic. We won't need no more endless `if then else`, no occasion to wonder how to mix two sub behaviors. We'll have one formalism to rule them all (Ok ok, I'll stop with the references...). We won't anymore drive the robot from the inside, we will command it from the outside. We won't feed it with speed, we will feed it with a direction and how much it should follow it or avoid it: a force, represented as a vector.
 
+
+<img src="./assets/robot_wheels.png" alt="picture of the differential drive" style="float:right; margin:10px;">
 In order to understand how such a force work, we need to get back to the differential drive picture. The robot is facing toward positive values of the Y axis and positive value of the X axis goes on its left. This means that a force over the Y axis will correspond to a forward/backward speed and a force over the X axis will correspond to an angular force. Below is a working code of such an implementation, you can modify coefficients to fit your needs.
 
 ```lua
