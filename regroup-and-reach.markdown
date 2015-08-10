@@ -118,3 +118,44 @@ for i = 1, #robot.colored_blob_omnidirectional_camera do
 	    " / green: " .. blob.color.green)
 end
 ```
+
+##d) Blink my minions, blink as one!
+Welcome to the wonderful world of robot communication. With the tools you have already at hands, you can create pretty complex behaviours. A simple and direct application would be using random robots as rally points (tell them to light up their beacons when on places of special interest, and make robots move toward that a specific light colour). 
+
+Let's see something a bit different, where we can see a more complex behaviour emerge, information sharing and convergence toward an agreement. There is a classic task to do that fits all those points: synchronisation. In our case, robots will blink their LEDs at a specific frequency, but not all of them together. The point of the game is to create an artificial intelligence that will not only allow two robots to synchronise, but a whole swarm. Bonus point if the swarm is moving.
+
+First let's make robots blink regularly. Just create a counter, and when switching back to zero, you blink your LEDs. elow is a proposed solution:
+
+```lua
+-- On top of the file, defined as global
+t = 0
+tmax = 0
+
+-- In the init function
+tmax = 20
+t = math.floor( math.random(0,tmax) )
+
+-- In the step function
+--Blinking
+if(t<tmax) then
+	t = t + 1
+	robot.leds.set_single_color(13,"black")
+else
+	t = 0
+	robot.leds.set_single_color(13,"red")
+end
+```
+
+Now, for the synchronisation and all, what could we do? Artificial Intelligence is like magic. When you know the trick it feels really less like magic, or, to quote Aperture Science, "the impossible is easy". But one should never forget that the interest of an intelligence is about what it can do, not so much about how it achieves its goal. Try to find a way to have your swarm synchronise, if only as an idea you would drop on paper. Once you got your brain all warm and fuzzy, feel free to look at the proposed solution.
+
+One way to do so is to try to close the gap between the blinking of different robots time at a time. For that, whenever a robot see a blink while he isn't blinking, he will artificially add a portion of his counter to itself.
+
+```lua
+--Synchronisation
+if(#robot.colored_blob_omnidirectional_camera > 0) then
+	t = 1.2 * t
+end
+```
+
+This code works better when you have a well mixed population. If it's not the case, you might see some oscillations between groups of robots. Try to create groups of robots (like for instance on specific spot on the ground, or have them randomly stop and change color of LEDs to send a stop and regroup signal) in order to have various patterns of blinking and simulate sub swarms.
+
