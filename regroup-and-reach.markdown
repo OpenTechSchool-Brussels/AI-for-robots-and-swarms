@@ -6,7 +6,7 @@ num: 2
 
 When dealing with a whole swarm, stuff get much more complex pretty quickly. Simple stuff like moving in the same direction requires complex communication and decision making protocols (think of that next time you're watching ants). Past section introduced you to simple lone behavior, this section will not only introduce the usage of multiple robots but will have you communicate between each other. A swarm is not just a group of robot randomly acting, it's an entity behaving as one, usually aiming at displaying collective dynamic which are greater than the sum of each robot' behavior singled out (a classic in [gestalt](https://en.wikipedia.org/wiki/Gestalt_psychology))
 
-##a) May the force be with you (George, don't sue us)
+##a) Acting: may the force be with you (George, don't sue us)
 So children, today we're going to learn about a new and exciting sensor! The treels, a portmanteau between wheels and déjà vu. Ok, my bad, been there done that. But not in this way. We'll learn a new paradigm of usage of those treels, one that is way more generic. We won't need no more endless `if then else`, no occasion to wonder how to mix two sub behaviors. We'll have one formalism to rule them all (Ok ok, I'll stop with the references...). We won't anymore drive the robot from the inside, we will command it from the outside. We won't feed it with speed, we will feed it with a direction and how much it should follow it or avoid it: a force, represented as a vector.
 
 <img src="./assets/robot_wheels.png" alt="picture of the differential drive" style="float:right; margin:10px;">
@@ -119,7 +119,7 @@ for i = 1, #robot.colored_blob_omnidirectional_camera do
 end
 ```
 
-##d) Blink my minions, blink as one!
+##d) Behaving: blink my minions, blink as one!
 Welcome to the wonderful world of robot communication. With the tools you have already at hands, you can create pretty complex behaviours. A simple and direct application would be using random robots as rally points (tell them to light up their beacons when on places of special interest, and make robots move toward that a specific light colour). 
 
 Let's see something a bit different, where we can see a more complex behaviour emerge, information sharing and convergence toward an agreement. There is a classic task to do that fits all those points: synchronisation. In our case, robots will blink their LEDs at a specific frequency, but not all of them together. The point of the game is to create an artificial intelligence that will not only allow two robots to synchronise, but a whole swarm. Bonus point if the swarm is moving.
@@ -158,4 +158,5 @@ end
 ```
 
 This code works better when you have a well mixed population. If it's not the case, you might see some oscillations between groups of robots. Try to create groups of robots (like for instance on specific spot on the ground, or have them randomly stop and change color of LEDs to send a stop and regroup signal) in order to have various patterns of blinking and simulate sub swarms.
+
 
