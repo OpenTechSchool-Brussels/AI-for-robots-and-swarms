@@ -43,7 +43,9 @@ function proximityAvoidanceForce()
 end
 ```
 
-In this code, we transform the sensing data from each proximity sensors into a force, sum them all up and return our value. We will just have to use that force to feed the `speedFromForce` function. Same can be done to create a real exploring behavior: a random walk. Try to imagine how randomly rolling in the area could be implemented. In our proposed solution below, we aimed at a constant speed and a random direction:
+In this code, we transform the sensing data from each proximity sensors into a force, sum them all up and return our value. We will just have to use that force to feed the `speedFromForce` function.
+
+Same can be done to create a real exploring behavior: a random walk. Try to imagine how randomly rolling in the area could be implemented. In our proposed solution below, we aimed at a constant speed and a random direction:
 
 ```lua
 function randForce(val)
