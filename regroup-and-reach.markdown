@@ -25,6 +25,37 @@ function speedFromForce(f)
 end
 ```
 
+Such way of coding doesn't just do wonder when you try to command the robot but is perfect when coupling and weighting behaviors. Can you imagine a new way to handle the proximity sensors with this new paradigm? Maybe it's already time to fine tune your line follower algorithm, I'm sure you can save a few seconds on that previous lap! Below is an indication about how to code object avoidance. You will see this time the model is more generic and doesn't follow a case by case structure.
+
+```lua
+function proximityAvoidanceForce()
+    avoidanceForce = {x = 0, y = 0}
+    for i = 1,24 do
+        -- "-100" for a strong repulsion 
+        v = -100 * robot.proximity[i].value 
+        a = robot.proximity[i].angle
+
+        sensorForce = {x = v * math.cos(a), y = v * math.sin(a)}
+        avoidanceForce.x = avoidanceForce.x + sensorForce.x
+        avoidanceForce.y = avoidanceForce.y + sensorForce.y
+    end
+    return avoidanceForce
+end
+```
+
+In this code, we transform the sensing data from each proximity sensors into a force, sum them all up and return our value. We will just have to use that force to feed the `speedFromForce` function. Same can be done to create a real exploring behavior: a random walk. Try to imagine how randomly rolling in the area could be implemented. In our proposed solution below, we aimed at a constant speed and a random direction:
+
+```lua
+function randForce(val)
+    angle = robot.random.uniform(- math.pi/2, math.pi/2)
+    randomForce = {x = val * math.cos(angle), y = val * math.sin(angle) }
+    return randomForce
+end
+```
+
+In order to use both behaviour at the same time, you just need to get both force, add them, and feed that to the `speedFromForce` function.
+
+
 ## b) Acting: LED stands for Let Everybody Dance.
 
 <img src="./assets/robot_leds.png" alt="leds actuator" style="float:right; margin:10px;">
