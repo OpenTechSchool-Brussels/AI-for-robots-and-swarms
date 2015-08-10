@@ -84,17 +84,19 @@ up = true
 -- In the step function
 
 -- update of the counter
-if(up)
+if(up) then
   cpt = cpt + 1
 else
   cpt = cpt - 1
 end
 
-if(cpt>3)
+if(cpt>3) then
   up = false
+end
 
-if(cpt<1)
+if(cpt<1) then
   up = true
+end
 
 -- display
 robot.leds.set_all_colors("black")	
@@ -138,11 +140,11 @@ t = math.floor( math.random(0,tmax) )
 -- In the step function
 --Blinking
 if(t<tmax) then
-	t = t + 1
-	robot.leds.set_single_color(13,"black")
+  t = t + 1
+  robot.leds.set_single_color(13,"black")
 else
-	t = 0
-	robot.leds.set_single_color(13,"red")
+  t = 0
+  robot.leds.set_single_color(13,"red")
 end
 ```
 
@@ -153,7 +155,7 @@ One way to do so is to try to close the gap between the blinking of different ro
 ```lua
 --Synchronisation
 if(#robot.colored_blob_omnidirectional_camera > 0) then
-	t = 1.2 * t
+  t = 1.2 * t
 end
 ```
 
