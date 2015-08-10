@@ -125,6 +125,4 @@ robot.wheels.set_velocity(leftSpeed, rightSpeed)
 You might actually have different result depending on the speed you put on your robot. Since your robot has an inertia, and that we didn't make him turn to himself, you might encounter weird behavior. You might want to fine tune a few of the parameters to get the behavior you want!
 
 ## e) Playing: Everybody race now!
-And when I say *everybody* I mean *your lone robot* (Pss, don't worry, problem solved at next section!). You have know all the basic tools at hand to play this racing game. This part here is not about following the course but about experimenting. Try to play with the bricks you know, try new ones, and make your racer the faster! If you want new tracks, you can always draw one over the background picture with your favorite image editor. Share tracks, race other IA, and compare your time! 
-
-
+And when I say *everybody* I mean *your lone robot* (Pss, don't worry, problem solved at next section!). You have know all the basic tools at hand to play this racing game. For circuits, you can have a look [here](./assets/circuits.tar.gz). Don't hesitate to create your own by drawing over the background picture with your favorite image editor and modify the size of the arena up to your liking. Create the best AI to follow the track, modify on the fly its behaviour would the line be long or very sneaky, keep in memory the places where you can go full speed and much much more to get the best time lap. Once done, compare and compete with other AI!
