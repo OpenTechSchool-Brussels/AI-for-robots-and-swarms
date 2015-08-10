@@ -1,70 +1,56 @@
 ---
 layout: default
 title:  "Braintenberg Vehicles"
-num: 4
+num: 3
 ---
 
-I confess a particularly strong love for those so called vehicles. Spawning from the realm of cybernetics (no kidding), those vehicles demonstrate a few things. First, you don't need complex algorithm to output interesting behaviour. And most importantly, you don't need a complex brain for humans (and animals) to project high cognition an assume the robot is more intelligent (or even sentient) than he really is. This is to say a lot about how actually we might project way too much on the sentient level while observing other humans...
+I confess a particularly strong love for those so called vehicles. Spawning from the realm of cybernetics (no kidding), those vehicles demonstrate a few things. First, you don't need complex algorithm to output interesting behavior. And most importantly, you don't need a complex brain for humans (and animals) to project high cognition and to assume that the robot is more intelligent (or even sentient) than he really is. This is to say a little about robotics, and a lot about how actually we might project way too much on the sentient level while observing other humans... In this section, we will learn what makes tick such vehicles and address their different personalities. Then we'll try to couple them together in order to create ... well ... a lovely mess! I highly recommend the reading of the book ([pdf](http://ge.tt/1ivvhQu/v/0)) from Braintenberg on these vehicles.
 
-In this section, we will learn what makes tick such vehicles and address their different personalities. Then we'll try to couple them together in order to create ... well ... a lovely mess!
-
-I highly recommend reading of the book ([pdf](http://ge.tt/1ivvhQu/v/0)) from Braintenberg on these vehicles.
-
-
-##a) Vehicles and behaviours
-Those vehicles are based on what we already know: forces of attraction and repulsion. They just add a little tweak to that by modulating the amplitude of this force depending on how close or far you are from what attracts/repulses you. So, we got two alternatives, attraction or repulsion, and strong force when close or when far, building up to 4 different personalities for the robots. Each have names, so fitting that in experiments, humans linked the displayed behaviours with their fitting personality names. Those are the four:
+##a) Vehicles and behaviors
+Those vehicles are based on what we already know: forces of attraction and repulsion. They just add a little tweak to that by modulating the amplitude of this force depending on how close or far you are from what attracts/repulses you. So, we got two alternatives, attraction or repulsion, and strong force when close or when far, building up to 4 different personalities for the robots. Each have names, so fitting that in experiments, humans linked the displayed behaviors with their fitting personality names. Those are the four:
 
 * **Lover** is attracted by the source, strongly when far from it, an grow slower as he gets closer to it. In short, he loves to cuddle and is eager to show it.
 * **Aggressor** is attracted too, but goes faster as he gets closer to its prey. A hunter in mind, don't get too close to it.
 * **Coward** is repulsed by the source, strongly when close to it and less to not at all when far from it. Come try to disturb it and it will flee. It is only happy when alone.
 * **Explorer** is repulsed by the source too, and move faster when he's far from it. He likes to cartography places, getting slower when close to them, and faster when trying to reach new places.
 
+In our case, the sensing will be done by the camera and the source can be any light. An LED over an item, a light source in the arena, or way more fun: the LEDs from other robots! Create a group of cat like aggressor and see how the coward mouse will react...
 
-##b) One function to rule them all
-As we saw, while those are very different personalities, they all are base on a similar behaviour. Let's make a function that sums them all and that would trigger each personalities depending on some entry parameters. So, all in all, what do we need to do ?
-
-* A way to chose which personality to trigger
-* Checking if we see a light (with the camera, to get the distance)
-* Put a max on the range of the camera
-* Link the value of the force with either the distance or its opposite
-* Link the sign of the value of the force with the attraction/repulsion
-* Create and return such a force
-
-That seems a lot to do, but you've done already most of it in previous sections. That plus a bit of applied logic and you should be good to go. Don't rush to it, but if you need it, below is a proposed solution:
+##b) One size fits them all
+While we could create one function for each behavior, we saw that they are actually pretty linked together. Let's create one that will take two parameters in entry, patterns of attractions and patterns of reaction to distance. Can you imagine such function? It should check for a light (or multiple ones), truncate it over a max value, and then returns a force depending on the two patterns we feed the function. That seems a lot to do, but you've done already most of it in previous sections. That plus a bit of applied logic and you should be good to go. Don't rush to it, but if you need it, below is a proposed solution for one blob:
 
 ```lua
-
 function cameraForce(attraction, strong)
-    camForce = {x = 0, y = 0}
+  camForce = {x = 0, y = 0}
 
-    -- Check if there is a light seen
-    if(#robot.colored_blob_omnidirectional_camera == 0) then
-        return camForce
-    end
-
-    dist = robot.colored_blob_omnidirectional_camera[1].distance
-    angle = robot.colored_blob_omnidirectional_camera[1].angle
-
-    -- Max range defined at 80 cm
-	 if(dist > 80) then
-        return camForce
-    end
-
-    -- Strong or Weak reaction
-    if(strong) then
-        val = 35 * dist/80
-    else
-        val = 35 * (1 - dist/80)
-    end
-
-    -- Attraction or Repulsion
-    if(not attraction) then
-        val = - val
-    end
-
-    camForce.x = val * math.cos(angle)
-    camForce.y = val * math.sin(angle)     	
+  -- Check if there is a light seen
+  if(#robot.colored_blob_omnidirectional_camera == 0) then
     return camForce
+  end
+
+  dist = robot.colored_blob_omnidirectional_camera[1].distance
+  angle = robot.colored_blob_omnidirectional_camera[1].angle
+
+  -- Max range defined at 80 cm
+  if(dist > 80) then
+    return camForce
+  end
+
+  -- Strong or Weak reaction
+  if(strong) then
+    val = 35 * dist/80
+  else
+    val = 35 * (1 - dist/80)
+  end
+
+  -- Attraction or Repulsion
+  if(not attraction) then
+    val = - val
+  end
+
+  camForce.x = val * math.cos(angle)
+  camForce.y = val * math.sin(angle)     	
+  return camForce
 end
 ```
 
@@ -73,56 +59,31 @@ Once you have this function, call it (with the parameters you want, like `camFor
 ##c) Finite State Automaton
 In life, people are not so simple to display only one personality, and robot aren't either. One way to model such variety in personality is to use [Finite State Automaton](http://en.wikipedia.org/wiki/Finite-state_machine) (FSA). All in all, they are just series of states with transitions that links them together.
 
-In Lua, that means creating a global table of states, a global value for the current state, and one function for each state (yay, clean code!). In those function, you will have both the behaviour and the transitions.
+In Lua, that means creating a global table of states, a global value for the current state, and one function for each state (yay, clean code!). In those function, you will have both the behavior and the transitions.
 
 As an example, let's have a robot that oscillate between lover, coward and random walk.
 
 ```lua
--- Define the global state and the table of behaviours
+-- Define the global state and the table of behaviors
 myState = "random_walk"
 state = {}
 
--- Defines the three behaviours
+-- Defines the three behaviors
 
 function state.random_walk()
-       -- Behavior
-
-	sumForce = { x = 0, y = 0}
-	-- Random force
-   randomForce = randForce(35)
-	sumForce.x = sumForce.x + randomForce.x
-	sumForce.y = sumForce.y + randomForce.y
-
-	-- Avoiding physical object
-	avoidanceForce = avoidForce()
-	sumForce.x = sumForce.x + avoidanceForce.x
-	sumForce.y = sumForce.y + avoidanceForce.y
-
-	speedFromForce(sumForce)
-
-   -- Transition
-    if(#robot.colored_blob_omnidirectional_camera > 0 and
-        robot.colored_blob_omnidirectional_camera[1].distance > 50) then
-        myState = "lover"
-    end
-
+  -- Behavior
+    -- already coded elsewhere
+    
+  -- Transition
+  if(#robot.colored_blob_omnidirectional_camera > 0 and
+    robot.colored_blob_omnidirectional_camera[1].distance > 50) then
+    myState = "lover"
+  end
 end
 
 function state.lover()
-       -- Behavior
-
-	sumForce = { x = 0, y = 0}
-	-- Light force
-	camForce = cameraForce(true,true)
-	sumForce.x = sumForce.x + camForce.x
-   sumForce.y = sumForce.y + camForce.y
-
-	-- Avoiding physical object
-	avoidanceForce = avoidForce()
-	sumForce.x = sumForce.x + avoidanceForce.x
-	sumForce.y = sumForce.y + avoidanceForce.y
-
-	speedFromForce(sumForce)
+  -- Behavior
+    -- already coded elsewhere	
 
    -- Transition
     if(#robot.colored_blob_omnidirectional_camera == 0) then
@@ -133,29 +94,14 @@ function state.lover()
 end
 
 function state.coward()
-       -- Behavior
+  -- Behavior
+    -- already coded elsewhere	
 
-	sumForce = { x = 0, y = 0}
-	-- Light force
-	camForce = cameraForce(true,true)
-	sumForce.x = sumForce.x + camForce.x
-   sumForce.y = sumForce.y + camForce.y
-
-	-- Avoiding physical object
-	avoidanceForce = avoidForce()
-	sumForce.x = sumForce.x + avoidanceForce.x
-	sumForce.y = sumForce.y + avoidanceForce.y
-
-	speedFromForce(sumForce)
-
-   -- Transition
-    if(#robot.colored_blob_omnidirectional_camera == 0) then
-        myState = "random_walk"
-    else
-	     if(robot.colored_blob_omnidirectional_camera[1].distance > 80) then
-            myState = "random_walk"
-        end
-    end
+  -- Transition
+  if(#robot.colored_blob_omnidirectional_camera or
+     robot.colored_blob_omnidirectional_camera[1].distance > 80) then
+    myState = "random_walk"
+  end
 end
 
 -- Which gives us a pretty simple step function
@@ -165,18 +111,12 @@ end
 
 ```
 
-From now on, you can combine whatever you just learn and create complex series of behaviours. Not just anymore a robot with reflexes but a well fitted artificial intelligence!
+This tool is particularly useful when you need to separate your task in multiple sub-task and have your robot behave in a difference way depending on the situation at hand. Another nice usage is to create heterogeneous swarms. Just call different functions depending on the value of `robot.id`. This allow you for instance to have behaviors of robot that answer each other, playing tag and such. You can create already a little artificial life simulation of your own here. Below is a little code example to start from.
 
-##c) Coupling behaviours
-While those vehicles are already amazing by themselves, its robotic, not swarm robotic. But did you see what we did? We used the omnidirectional camera to check on the light. We can use it to check on beacons too, and have robots interacting together this way!
-
-Possibilities are endless here so we will leave you the making as an exercise. Can you imagine robots playing tag? What kind of behaviour would fit better the robot that is chasing the others? What behaviour for the one that escape? You can here have a nice life simulation and reuse game rules from the real world and apply them to robotics.
-
-You might wonder how to have many robots with different behaviour. You could have different code for each robot (the clean way) but the quicker one would be to select the behaviour based on the robot's id. Want only one robot to chase the others ? Than make the robot with id equals 1 having a particular behaviour. Let's see how it works if we want a half-coward and half-lover swarm.
 
 ```lua
 -- In step function
-if( math.fmod(robot.id,2) == 0) then -- Check if even 
+if( robot.id % 2 == 0) then -- Check if even 
     state("lover")
 else
     state("coward")
