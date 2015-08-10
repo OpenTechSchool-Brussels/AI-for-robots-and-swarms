@@ -41,7 +41,7 @@ In the Lua code editor, you will find that there are already some functions defi
 On top of all the power of Lua, ARGoS provide you with a specific container, adequately called `robot`. Anything robot related (sensor & actuator) will go through it. Another thing to keep in mind, printing stuff doesn't go through the classic `print` Lua function, but through the ARGoS `log` function that re-routs printing to the logging text areas of the simulator.
 
 Let's launch our first experimentation to better understand what's happening. 
-Type inside the step function the following line, where robot.id refers to the robot own identification number.
+Type inside the step function the following line, where `robot.id` refers to the robot own identification number.
 
 ```Lua
 log("Hello, my name is " .. robot.id)
