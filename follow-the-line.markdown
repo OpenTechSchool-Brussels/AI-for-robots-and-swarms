@@ -58,11 +58,11 @@ sensingLeft = robot.proximity[3].value + robot.proximity[4].value +
 sensingRight = robot.proximity[22].value+ robot.proximity[21].value +
                robot.proximity[20].value + robot.proximity[19].value
 
-if( sensingFront != 0 )
+if( sensingFront != 0 ) then
   driveAsCar(-10, 1)
-elseif( sensingLeft != 0 )
+elseif( sensingLeft != 0 ) then
   driveAsCar(7,3)
-elseif( sensingRight != 0 )
+elseif( sensingRight != 0 ) then
   driveAsCar(7,-3)
 else
   driveAsCar(10,0)
@@ -92,14 +92,16 @@ In this section's area are a few patterns on the ground, any idea on how to make
 ```lua
 onSpot = true
 for i = 1,4 do
-    if( robot.motor_ground[i].value > 0.10 )
+    if( robot.motor_ground[i].value > 0.10 ) then
       onSpot = false
+    end
 end
 
-if(onSpot)
+if(onSpot) then
   driveAsCar(0,0)
 else
   driveAsCar(robot.random.uniform(10,20), robot.random.uniform(-10,10))
+end
 ```
 
 ## d) Behaving: Follow the line
@@ -113,11 +115,13 @@ Ok, that is great. You can move, you can see where you are moving. What about co
 leftSpeed = 5
 rightSpeed = 5
 
-if(robot.motor_ground[1].value > 0.80) -- something on my left
+if(robot.motor_ground[1].value > 0.80) then -- something on my left
   rightSpeed = -3
+end
 
-if(robot.motor_ground[4].value > 0.80) -- something on my right
+if(robot.motor_ground[4].value > 0.80) then -- something on my right
   leftSpeed = -3
+end
 
 robot.wheels.set_velocity(leftSpeed, rightSpeed)
 ```
