@@ -31,7 +31,47 @@ end
 
 Pretty good. You can already use this formalism to get a better control over the robot. But we don't want to pilot our robots as a car (from the inside) we want to give him orders (from the outside). We'll see later on even better ways to command the robot. For now, we have more important issues, our robot is ... a bit blind.
 
-## b) Sensing: ground color & proximity sensor
+##b) Sensing: Invisible touch
+
+<img src="./assets/robot_proximity.png" alt="proximity sensor" style="float:right; margin:10px;">
+
+Don't take me wrong, I love driving straight in walls as much as the next guy, but it doesn't really scream "intelligence". Let's try to level with a two years old and learn how to detect object and avoid them. For that purpose, the robots are equipped with proximity sensors that reacts to physical object on a 10cm range. There are 24 of them, spread in a ring around the robot body. Each readings is a table composed of an *angle* in radians and a *value* between 0 and 1. The angle defines the position of the sensors around the robot and the value is as high as the object is close (0 means nothing is detected). They are all contained in the `robot.proximity` table and can be accessed as follow:
+
+```lua
+log("--Proximity Sensors--")
+for i = 1,24 do
+    log("Angle: " .. robot.proximity[i].angle ..
+        "Value: " .. robot.proximity[i].value)
+end
+```
+
+On of the most common usage for the proximity sensors is to avoid obstacles (object, walls, other robots...). We will see in next section a better way to use such information, but we can already make something simple out of it. Can you imagine what you need to do if you want to avoid obstacles, or at least react and turn in the right direction when encountering them? Try out by yourself, and once satisfied with the result you can compare your code to the following proposition:
+
+```lua
+
+sensingFront = robot.proximity[1].value  + robot.proximity[2].value +
+               robot.proximity[24].value + robot.proximity[23].value
+
+sensingLeft = robot.proximity[3].value + robot.proximity[4].value +
+              robot.proximity[5].value + robot.proximity[6].value
+
+sensingRight = robot.proximity[22].value+ robot.proximity[21].value +
+               robot.proximity[20].value + robot.proximity[19].value
+
+if( sensingFront != 0 )
+  driveAsCar(-10, 1)
+elseif( sensingLeft != 0 )
+  driveAsCar(7,3)
+elseif( sensingRight != 0 )
+  driveAsCar(7,-3)
+else
+  driveAsCar(10,0)
+end
+```
+
+Great, now your robot can behave as brownian particle. You must (or at least should) be so proud of it. Well, anyway, if love is blind, so is your robot right now. Let's change that. A bit. A liiiiitle bit.
+
+## c) Sensing: ground color
 Don't expect 20/20 vision right from the start. Especially that our robots are meant to work as a team. As such, they are not pumped up with sensors all around and heavy computing power. They are simple (who said stupid?!) robots, with local sensing. And we'll get as local as one can get: watching the ground under your own feet (well, treels). Or more precisely, detecting gray level of the ground's color. This is very useful for reading marks on the ground, would that be for communication purpose, to emphasize areas of purpose, to guide robot over a path...
 
 <img src="./assets/robot_motor_ground.png" alt="ground sensor" style="float:right; margin:10px;">
@@ -39,7 +79,7 @@ Don't expect 20/20 vision right from the start. Especially that our robots are m
 The robot have 4 grounds sensors on its lower part, each reading the brightness of the ground under them. They output a value between 0 and 1; 0 for black and 1 for white, shades of gray for values in between. Each readings is a table composed of *value* an *offset*. The value refers to the brightness and the offset to a vector for the position of the specific sensor stemming from the center of the robot. Since we have 4 sensors, we have 4 of those readings. They are all contained in the `robot.motor_ground` table and can be accessed as follow:
 
 ```lua
-log("----")
+log("--Ground Sensors--")
 for i = 1,4 do
     log(robot.motor_ground[i].value)
     log(robot.motor_ground[i].offset.x .. " " ..
@@ -62,7 +102,7 @@ else
   driveAsCar(robot.random.uniform(10,20), robot.random.uniform(-10,10))
 ```
 
-## c) Behaving: Follow the line
+## d) Behaving: Follow the line
 Ok, that is great. You can move, you can see where you are moving. What about coupling both and making you move following marks on the ground? This is actually a very classic algorithm which is solved both by first learners and highly skilled engineers, depending on the environment and precision/speed required. Our job is simple: we have a line, we want to follow it, when it's straight (simple!) and when it's turning (ergh...).
 
 
@@ -84,7 +124,7 @@ robot.wheels.set_velocity(leftSpeed, rightSpeed)
 
 You might actually have different result depending on the speed you put on your robot. Since your robot has an inertia, and that we didn't make him turn to himself, you might encounter weird behavior. You might want to fine tune a few of the parameters to get the behavior you want!
 
-## d) Playing: Everybody race now!
+## e) Playing: Everybody race now!
 And when I say *everybody* I mean *your lone robot* (Pss, don't worry, problem solved at next section!). You have know all the basic tools at hand to play this racing game. This part here is not about following the course but about experimenting. Try to play with the bricks you know, try new ones, and make your racer the faster! If you want new tracks, you can always draw one over the background picture with your favorite image editor. Share tracks, race other IA, and compare your time! 
 
 
