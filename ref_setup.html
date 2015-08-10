@@ -3,118 +3,116 @@ layout: default
 title:  "Reference Setup"
 ---
 
-<pre>
-<?xml version="1.0" ?>
-<argos-configuration>
-
-  <!-- ************************* -->
-  <!-- * General configuration * -->
-  <!-- ************************* -->
-  <framework>
-    <experiment length="0" ticks_per_second="10" />
-    <system threads="0" />
-  </framework>
-
-  <!-- *************** -->
-  <!-- * Controllers * -->
-  <!-- *************** -->
-
-  <!-- tip1: If you want to not show the rays of some sensors, just put "false" instead of "true"-->
-  <controllers>
-
-    <lua_controller id="lua">
-      <actuators>
-        <differential_steering implementation="default" />
-        <leds implementation="default" medium="leds" />
-      </actuators>
-      <sensors>
-        <differential_steering implementation="default" />
-        <footbot_motor_ground implementation="rot_z_only" />
-        <footbot_proximity implementation="default" show_rays="true" />
-        <footbot_light implementation="rot_z_only" />
-        <colored_blob_omnidirectional_camera implementation="rot_z_only" medium="leds" show_rays="true" />
-      </sensors>
-      <params />
-    </lua_controller>
-
-  </controllers>
-
-  <!-- *********************** -->
-  <!-- * Arena configuration * -->
-  <!-- *********************** -->
-  
-  <!-- You can here prametrise the size of the area, position of light-->
-  <!-- distribution of robots and object...-->
-
-  <arena size="4, 4, 1" center="0,0,0.5">
-
- <light id="light"
-        position="0,0,0.5"
-        orientation="0,0,0"
-        color="yellow"
-        intensity="3.0"
-        medium="leds" />
-
-    <floor id="f" source="image" path="./one_spot.png" /> 
-    
-    <box id="bn" size="0.1, 4, 0.2" movable="false">
-      <body position="2,0,0"  orientation="0,0,0" />
-    </box>
-    <box id="bs" size="0.1, 4, 0.2" movable="false">
-      <body position="-2,0,0" orientation="0,0,0" />
-    </box>
-    <box id="be" size="4, 0.1, 0.2" movable="false">
-      <body position="0,-2,0" orientation="0,0,0" />
-    </box>
-    <box id="bw" size="4, 0.1, 0.2" movable="false">
-      <body position="0,2,0" orientation="0,0,0" />
-    </box>
-
-    <distribute>
-      <position method="uniform" min="-2,-2,0" max="2,2,0" />
-      <orientation method="uniform" min="0,0,0" max="360,0,0" />
-      <entity quantity="20" max_trials="100">
-        <box id="o" size="0.2, 0.2, 0.2" movable="false" />
-      </entity>
-    </distribute>
-
-    <distribute>
-      <position method="uniform" min="-2,-2,0" max="2,2,0" />
-      <orientation method="uniform" min="0,0,0" max="360,0,0" />
-      <entity quantity="20" max_trials="100">
-        <foot-bot id="fb">
-          <controller config="lua" />
-        </foot-bot>
-      </entity>
-    </distribute>
-
-  </arena>
-
-  <!-- ******************* -->
-  <!-- * Physics engines * -->
-  <!-- ******************* -->
-  <physics_engines>
-    <dynamics2d id="dyn2d" />
-  </physics_engines>
-
-  <!-- ********* -->
-  <!-- * Media * -->
-  <!-- ********* -->
-  <media>
-    <led id="leds" />
-  </media>
-
-
-  <!-- ****************** -->
-  <!-- * Visualization * -->
-  <!-- ****************** -->
-  <visualization>
-    <qt-opengl lua_editor="true">
-      <camera>
-        <placement idx="0" position="-2.0767,0.015,2.74921" look_at="-1.59254,0.015,1.87423" lens_focal_length="20" />
-      </camera>
-    </qt-opengl>
-  </visualization>
-
-</argos-configuration>
-</pre>
+&lt;?xml version="1.0" ?&gt;<br />
+&lt;argos-configuration&gt;<br />
+<br />
+  &lt;!-- ************************* --&gt;<br />
+  &lt;!-- * General configuration * --&gt;<br />
+  &lt;!-- ************************* --&gt;<br />
+  &lt;framework&gt;<br />
+    &lt;experiment length="0" ticks_per_second="10" /&gt;<br />
+    &lt;system threads="0" /&gt;<br />
+  &lt;/framework&gt;<br />
+<br />
+  &lt;!-- *************** --&gt;<br />
+  &lt;!-- * Controllers * --&gt;<br />
+  &lt;!-- *************** --&gt;<br />
+<br />
+  &lt;!-- tip1: If you want to not show the rays of some sensors, just put "false" instead of "true"--&gt;<br />
+  &lt;controllers&gt;<br />
+<br />
+    &lt;lua_controller id="lua"&gt;<br />
+      &lt;actuators&gt;<br />
+        &lt;differential_steering implementation="default" /&gt;<br />
+        &lt;leds implementation="default" medium="leds" /&gt;<br />
+      &lt;/actuators&gt;<br />
+      &lt;sensors&gt;<br />
+        &lt;differential_steering implementation="default" /&gt;<br />
+        &lt;footbot_motor_ground implementation="rot_z_only" /&gt;<br />
+        &lt;footbot_proximity implementation="default" show_rays="true" /&gt;<br />
+        &lt;footbot_light implementation="rot_z_only" /&gt;<br />
+        &lt;colored_blob_omnidirectional_camera implementation="rot_z_only" medium="leds" show_rays="true" /&gt;<br />
+      &lt;/sensors&gt;<br />
+      &lt;params /&gt;<br />
+    &lt;/lua_controller&gt;<br />
+<br />
+  &lt;/controllers&gt;<br />
+<br />
+  &lt;!-- *********************** --&gt;<br />
+  &lt;!-- * Arena configuration * --&gt;<br />
+  &lt;!-- *********************** --&gt;<br />
+  <br />
+  &lt;!-- You can here prametrise the size of the area, position of light--&gt;<br />
+  &lt;!-- distribution of robots and object...--&gt;<br />
+<br />
+  &lt;arena size="4, 4, 1" center="0,0,0.5"&gt;<br />
+<br />
+ &lt;light id="light"<br />
+        position="0,0,0.5"<br />
+        orientation="0,0,0"<br />
+        color="yellow"<br />
+        intensity="3.0"<br />
+        medium="leds" /&gt;<br />
+<br />
+    &lt;floor id="f" source="image" path="./one_spot.png" /&gt; <br />
+    <br />
+    &lt;box id="bn" size="0.1, 4, 0.2" movable="false"&gt;<br />
+      &lt;body position="2,0,0"  orientation="0,0,0" /&gt;<br />
+    &lt;/box&gt;<br />
+    &lt;box id="bs" size="0.1, 4, 0.2" movable="false"&gt;<br />
+      &lt;body position="-2,0,0" orientation="0,0,0" /&gt;<br />
+    &lt;/box&gt;<br />
+    &lt;box id="be" size="4, 0.1, 0.2" movable="false"&gt;<br />
+      &lt;body position="0,-2,0" orientation="0,0,0" /&gt;<br />
+    &lt;/box&gt;<br />
+    &lt;box id="bw" size="4, 0.1, 0.2" movable="false"&gt;<br />
+      &lt;body position="0,2,0" orientation="0,0,0" /&gt;<br />
+    &lt;/box&gt;<br />
+<br />
+    &lt;distribute&gt;<br />
+      &lt;position method="uniform" min="-2,-2,0" max="2,2,0" /&gt;<br />
+      &lt;orientation method="uniform" min="0,0,0" max="360,0,0" /&gt;<br />
+      &lt;entity quantity="20" max_trials="100"&gt;<br />
+        &lt;box id="o" size="0.2, 0.2, 0.2" movable="false" /&gt;<br />
+      &lt;/entity&gt;<br />
+    &lt;/distribute&gt;<br />
+<br />
+    &lt;distribute&gt;<br />
+      &lt;position method="uniform" min="-2,-2,0" max="2,2,0" /&gt;<br />
+      &lt;orientation method="uniform" min="0,0,0" max="360,0,0" /&gt;<br />
+      &lt;entity quantity="20" max_trials="100"&gt;<br />
+        &lt;foot-bot id="fb"&gt;<br />
+          &lt;controller config="lua" /&gt;<br />
+        &lt;/foot-bot&gt;<br />
+      &lt;/entity&gt;<br />
+    &lt;/distribute&gt;<br />
+<br />
+  &lt;/arena&gt;<br />
+<br />
+  &lt;!-- ******************* --&gt;<br />
+  &lt;!-- * Physics engines * --&gt;<br />
+  &lt;!-- ******************* --&gt;<br />
+  &lt;physics_engines&gt;<br />
+    &lt;dynamics2d id="dyn2d" /&gt;<br />
+  &lt;/physics_engines&gt;<br />
+<br />
+  &lt;!-- ********* --&gt;<br />
+  &lt;!-- * Media * --&gt;<br />
+  &lt;!-- ********* --&gt;<br />
+  &lt;media&gt;<br />
+    &lt;led id="leds" /&gt;<br />
+  &lt;/media&gt;<br />
+<br />
+<br />
+  &lt;!-- ****************** --&gt;<br />
+  &lt;!-- * Visualization * --&gt;<br />
+  &lt;!-- ****************** --&gt;<br />
+  &lt;visualization&gt;<br />
+    &lt;qt-opengl lua_editor="true"&gt;<br />
+      &lt;camera&gt;<br />
+        &lt;placement idx="0" position="-2.0767,0.015,2.74921" look_at="-1.59254,0.015,1.87423" lens_focal_length="20" /&gt;<br />
+      &lt;/camera&gt;<br />
+    &lt;/qt-opengl&gt;<br />
+  &lt;/visualization&gt;<br />
+<br />
+&lt;/argos-configuration&gt;
