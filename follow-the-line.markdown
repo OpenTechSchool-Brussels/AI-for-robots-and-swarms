@@ -12,9 +12,9 @@ Basic rule of life: if you don't move, things are going to get pretty hard up th
 
 Actually, they are *treels*, a portmanteau neologism of wheels and trails. But for all your concern, you can see the robot as two wheels along the horizontal axis. Controlling your robot movement will go through setting the speed of each of those wheels. For that we use the `robot.wheels.set_velocity(leftSpeed, rightSpeed)` function which accept two values (yep, left and right speed) as parameters, both measured in cm/s. Positive values will make wheels roll forward, negative will make them roll backward.
 
-Is this this simple to control your robot? Yes it is. Try out various speed for each wheels to get a feeling of how the robots is moving. Fors instance, moving straight is *leftSpeed = rightSpeed*, turning right is *leftSpeed > rightSpeed* and turning on your self is *leftSpeed = -rightSpeed*. While your moving is aimless, you can already think of a few stuff to do with it. Try to draw shapes with your robots for instance (while circle are pretty straight forward, try to draw triangles or more complexe shapes!).
+Is this this simple to control your robot? Yes it is. Try out various speed for each wheels to get a feeling of how the robots is moving. For instance, moving straight is *leftSpeed = rightSpeed*, turning right is *leftSpeed > rightSpeed* and turning on your self is *leftSpeed = -rightSpeed*. While your moving is aimless, you can already think of a few stuff to do with it. Try to draw shapes with your robots for instance (while circle are pretty straight forward, try to draw triangles or more complex shapes!).
 
-While setting directly the wheels' speed does the job, it's not really practical. If the robots think it terms of left and right speed, we don't really. We would be more used to think in terms of moving forward/backward and turning, like when driving a car. So, we want to feed the robot forward speed and an angular speed, and it to translate it to left wheel speed and right wheel speed. Any idea? Try to imagine if you have only forward or angular, and then compose the two of them. Below are a possible solution, don't look at it before you've tried out a little bit by yourself! To make it easier to use, we formalised it as a function. A good time if ever to see how they are coded in Lua!
+While setting directly the wheels' speed does the job, it's not really practical. If the robots think it terms of left and right speed, we don't really. We would be more used to think in terms of moving forward/backward and turning, like when driving a car. So, we want to feed the robot forward speed and an angular speed, and it to translate it to left wheel speed and right wheel speed. Any idea? Try to imagine if you have only forward or angular, and then compose the two of them. Below are a possible solution, don't look at it before you've tried out a little bit by yourself! To make it easier to use, we formalized it as a function. A good time if ever to see how they are coded in Lua!
 
 <img src="./assets/robot_wheels.png" alt="picture of the differential drive" style="float:right; margin:10px;">
 
@@ -29,14 +29,14 @@ function driveAsCar(forwardSpeed, angularSpeed)
 end
 ```
 
-Pretty good. You can already use this formalisme to get a better control over the robot. But we don't want to pilot our robots as a car (from the inside) we want to give him orders (from the outside). We'll see later on even better ways to command the robot. For now, we have more important issues, our robot is ... a bit blind.
+Pretty good. You can already use this formalism to get a better control over the robot. But we don't want to pilot our robots as a car (from the inside) we want to give him orders (from the outside). We'll see later on even better ways to command the robot. For now, we have more important issues, our robot is ... a bit blind.
 
-## b) Sensing: ground color
-Don't expect 20/20 vision right from the start. Especially that our robots are meant to work as a team. As such, they are not pumped up with sensors all around and heavy computing power. They are simple (who said stupid?!) robots, with local sensing. And we'll get as local as one can get: watching the ground under your own feet (well, treels). Or more precisely, detecting gray level of the ground's color. This is very usefull for reading marks on the ground, would that be for communcation purpose, to emphasize areas of purpose, to guide robot over a path...
+## b) Sensing: ground color & proximity sensor
+Don't expect 20/20 vision right from the start. Especially that our robots are meant to work as a team. As such, they are not pumped up with sensors all around and heavy computing power. They are simple (who said stupid?!) robots, with local sensing. And we'll get as local as one can get: watching the ground under your own feet (well, treels). Or more precisely, detecting gray level of the ground's color. This is very useful for reading marks on the ground, would that be for communication purpose, to emphasize areas of purpose, to guide robot over a path...
 
 <img src="./assets/robot_motor_ground.png" alt="ground sensor" style="float:right; margin:10px;">
 
-The robot have 4 grounds sensors on its lower part, each reading the brightness of the ground under them. They output a value between 0 and 1; 0 for black and 1 for white, shades of gray for values in between. Each readings is a table composed of *value* an *offset*. The value refers to the brightness and the offset to a vector for the position of the specific sensor stemming from the centre of the robot. Since we have 4 sensors, we have 4 of those readings. They are all contained in the `robot.motor_ground` table and can be accessed as follow:
+The robot have 4 grounds sensors on its lower part, each reading the brightness of the ground under them. They output a value between 0 and 1; 0 for black and 1 for white, shades of gray for values in between. Each readings is a table composed of *value* an *offset*. The value refers to the brightness and the offset to a vector for the position of the specific sensor stemming from the center of the robot. Since we have 4 sensors, we have 4 of those readings. They are all contained in the `robot.motor_ground` table and can be accessed as follow:
 
 ```lua
 log("----")
@@ -85,6 +85,6 @@ robot.wheels.set_velocity(leftSpeed, rightSpeed)
 You might actually have different result depending on the speed you put on your robot. Since your robot has an inertia, and that we didn't make him turn to himself, you might encounter weird behavior. You might want to fine tune a few of the parameters to get the behavior you want!
 
 ## d) Playing: Everybody race now!
-And when I say *everybody* I mean *your lone robot* (Pss, don't worry, problem solved at next section!). You have know all the basic tools at hand to play this racing game. This part here is not about following the course but about experimentating. Try to play with the bricks you know, try new ones, and make your racer the faster! If you want new tracks, you can always draw one over the background picture with your favorite image editor. Share trackes, race other IA, and compare your time! 
+And when I say *everybody* I mean *your lone robot* (Pss, don't worry, problem solved at next section!). You have know all the basic tools at hand to play this racing game. This part here is not about following the course but about experimenting. Try to play with the bricks you know, try new ones, and make your racer the faster! If you want new tracks, you can always draw one over the background picture with your favorite image editor. Share tracks, race other IA, and compare your time! 
 
 
