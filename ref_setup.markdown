@@ -55,7 +55,7 @@ Now if you actually want to make Player Vs Player, or should I say, AI Vs AI, yo
         <sensors>
             <!-- bla bla bla your code -->
         </sensors>
-        <params script="./AI_1.lua"/>
+        <params script="./AI_2.lua"/>
     </lua_controller>
 
 </controllers>
