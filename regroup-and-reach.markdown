@@ -129,48 +129,66 @@ for i = 1, #robot.colored_blob_omnidirectional_camera do
 end
 ```
 
-Ok, text log are pretty greate (they still are), but didn't start lacking any less since last time when you prefere overall view over precision. Bla bla bla reference material. Like for the proxiity sensor, if you remember how, update by yourself the .argos setup file, if you're hesitating a bit, we have you [covered](./ref_setup.html#debug).
+Ok, text log are pretty great (they still are), but didn't start lacking any less since last time when you prefer overall view over precision. Bla bla bla reference material. Like for the proximity sensor, if you remember how, update by yourself the .argos setup file, if you're hesitating a bit, we have you [covered](./ref_setup.html#debug).
 
 ##d) Behaving: blink my minions, blink as one!
-Welcome to the wonderful world of robot communication. With the tools you have already at hands, you can create pretty complex behaviours. A simple and direct application would be using random robots as rally points (tell them to light up their beacons when on places of special interest, and make robots move toward that a specific light colour). 
+Welcome to the wonderful world of robot communication. With the tools you have already at hands, you can create pretty complex behaviors. A simple and direct application would be using random robots as rally points (tell them to light up their beacons when on places of special interest, and make robots move toward that a specific light color). 
 
-Let's see something a bit different, where we can see a more complex behaviour emerge, information sharing and convergence toward an agreement. There is a classic task to do that fits all those points: synchronisation. In our case, robots will blink their LEDs at a specific frequency, but not all of them together. The point of the game is to create an artificial intelligence that will not only allow two robots to synchronise, but a whole swarm. Bonus point if the swarm is moving.
+Let's see something a bit different, where we can see a more complex behavior emerge, information sharing and convergence toward an agreement. There is a classic task to do that fits all those points: synchronization. In our case, robots will blink their LEDs at a specific frequency, but not all of them together. The point of the game is to create an artificial intelligence that will not only allow two robots to synchronize, but a whole swarm. Bonus point if the swarm is moving.
 
-First let's make robots blink regularly. Just create a counter, and when switching back to zero, you blink your LEDs. elow is a proposed solution:
+First let's make robots blink regularly. Just create a counter, and when switching back to zero, you blink your LEDs. Below is a proposed solution.
+
+First define a few stuff global:
 
 ```lua
 -- On top of the file, defined as global
 t = 0
 tmax = 0
+```
 
--- In the init function
-tmax = 20
-t = math.floor( math.random(0,tmax) )
+Then instantiate it:
 
--- In the step function
---Blinking
-if(t<tmax) then
-  t = t + 1
-  robot.leds.set_single_color(13,"black")
-else
-  t = 0
-  robot.leds.set_single_color(13,"red")
+
+```lua
+function init()
+    robot.colored_blob_omnidirectional_camera.enable()
+    tmax = 100
+    t = math.floor( math.random(0,tmax) )
 end
 ```
 
-Now, for the synchronisation and all, what could we do? Artificial Intelligence is like magic. When you know the trick it feels really less like magic, or, to quote Aperture Science, "the impossible is easy". But one should never forget that the interest of an intelligence is about what it can do, not so much about how it achieves its goal. Try to find a way to have your swarm synchronise, if only as an idea you would drop on paper. Once you got your brain all warm and fuzzy, feel free to look at the proposed solution.
+And as for the blinking behavior:
+
+```lua
+function step()
+
+    --Blinking
+
+    t = t + 1
+
+    if(t<tmax) then
+        t = t + 1
+        robot.leds.set_single_color(13,"black")
+    else
+        t = 0
+        robot.leds.set_single_color(13,"red")
+    end
+
+end
+```
+
+Now, for the synchronization and all, what could we do? Artificial Intelligence is like magic. When you know the trick it feels really less like magic, or, to quote Aperture Science, "the impossible is easy". But one should never forget that the interest of an intelligence is about what it can do, not so much about how it achieves its goal. Try to find a way to have your swarm synchronize, if only as an idea you would drop on paper. Once you got your brain all warm and fuzzy, feel free to look at the proposed solution.
 
 One way to do so is to try to close the gap between the blinking of different robots time at a time. For that, whenever a robot see a blink while he isn't blinking, he will artificially add a portion of his counter to itself.
 
 ```lua
 --Synchronisation
 if(#robot.colored_blob_omnidirectional_camera > 0) then
-  t = 1.2 * t
+  t = t + 0.2 * t
 end
 ```
 
-This code works better when you have a well mixed population. If it's not the case, you might see some oscillations between groups of robots. Try to create groups of robots (like for instance on specific spot on the ground, or have them randomly stop and change color of LEDs to send a stop and regroup signal) in order to have various patterns of blinking and simulate sub swarms.
-
+Here we only used *one* signal. Would you have a lot of robots emitting a signal or one, it doesn't change. What if it did? There are a lot of variation to explore (not just changing that magic 1.2 number!), you'll have the occasion to explore them in this section's game! By the way, if you want to use the little curved arrow meaning *restart*, don't forget to put some code in your *reset* function in order to well, reset and randomize back the behavior!
 
 ##d) Playing: Hive mind
 So, easy pea right? But what if you're actually having your robots spawned randomly, sometimes out of reach? Getting more complex already. You need to regroup (ah! I know how to do that!), reach out, and synchronize. Ok, that's not too hard. But what if you play against someone and blink both with a different color? And what if ... you're allowed to cheat and blink as the color of the other one? Now it's getting insane, the good kind of insane! Try to battle against each other and see if you manage to get all your robots blinking at once while messing with the other ones! 
