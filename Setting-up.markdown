@@ -25,7 +25,7 @@ You can either install ARGoS from source or directly from packages. The later sh
 In order to check if ARGoS is well installed, just type `argos3 --version`, a green text should appear with the version name of currently installed ARGoS.
 
 ##c) Your first code
-Let's release the beast. When launching experiments in ARGoS, you need to feed it with an experimental setup file  (the .argos file), announced with the command line flag `-c`, c standing for configuration. It goes likes: `argos3 -c expSetup.argos`. As mentioned earlier, you won't need to deal much with configuration files. You can download [here](./assets/setup/setup_0.tar.tgz) the configuration file which we will use as well as the picture we will use for the ground floor. Create a working directory, put the files there, open your command line in this directory, launch `argos3 -c setup.argos` and voilà! 
+Let's release the beast. When launching experiments in ARGoS, you need to feed it with an experimental setup file  (the .argos file), announced with the command line flag `-c`, c standing for configuration. It goes likes: `argos3 -c expSetup.argos`. As mentioned earlier, you won't need to deal much with configuration files. You can download [here](./assets/setup/setup_0.tar.gz) the configuration file which we will use as well as the picture we will use for the ground floor. Create a working directory, put the files there, open your command line in this directory, launch `argos3 -c setup.argos` and voilà! 
 
 You should see two windows appearing. One is a text editor (where you will type your Lua code), the other one is the ARGoS simulator itself (where you will see the lovely little robots moving and behaving erraticly).
 
