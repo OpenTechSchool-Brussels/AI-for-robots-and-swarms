@@ -4,7 +4,7 @@ title:  "Let's get rolling"
 num: 1
 ---
 
-Basic rule of life: if you don't move, things are going to get pretty hard up the road... Now different creature and inventors found various way to solve that issue. To each hardware solution come a different software solutions; you don't control a car, a 4 leg robot or a rocket the same way. In this section we'll discover how to make your robot move and race for the stars. In this section, we will use this [setup](./assets/setup/setup_1.tar.gz) with varying circuits.
+Basic rule of life: if you don't move, things are going to get pretty tough up the road... Now different creature and inventors found various way to solve that issue. To each hardware solution come a different software solutions; you don't control a car, a 4 leg robot or a rocket the same way. In this section we'll discover how to make your robot move and race for the stars. In this section, we will use this [setup](./assets/setup/setup_1.tar.gz) with varying circuits.
 
 <img src="./assets/marxbot.jpg" alt="picture of the marxbot" style="height:300px; float:right; margin:10px;">
 
@@ -59,6 +59,8 @@ for i = 1,24 do
         "Value: " .. robot.proximity[i].value)
 end
 ```
+
+Ok, text log are pretty greate (they are), but are lacking a bit when you prefere overall view over precision. When you want the later, you might want to display the rays of the sensors. How? Well it's explained in the [setup ref material](./ref_setup.html#debug)!
 
 On of the most common usage for the proximity sensors is to avoid obstacles (object, walls, other robots...). We will see in next section a better way to use such information, but we can already make something simple out of it. Can you imagine what you need to do if you want to avoid obstacles, or at least react and turn in the right direction when encountering them? Try out by yourself, and once satisfied with the result you can compare your code to the following proposition:
 
