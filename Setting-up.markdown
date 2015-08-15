@@ -20,7 +20,7 @@ The environment code (loop functions) will be given to you when needed, nothing 
 Three references pages are provided to you. One on [ARGoS](./ref_argos.html) and another on [Lua](./ref_lua.html) (taken from reference material of Carlo Pinciroli's course on Swarm Intelligence). The [third](./ref_setup.html) is about the .argos XML file and will help in creating new setups. Be sure to come back to those three refs when not sure about what you're doing.
 
 ##b) Setting Up ARGoS & Lua
-You can either install ARGoS from source or directly from packages. The later should be simpler. Only fall back to the former if you can't make it work, or if you want cutting edge code. Installation can be done on Mac and Linux, alas no possibility for Windows. To install from package, go [there](http://www.argos-sim.info/core.php); to install from source, check [here](https://github.com/ilpincy/argos3/)  
+You can either install ARGoS from source or directly from packages. The later should be simpler. Only fall back to the former if you can't make it work, or if you want cutting edge code. Installation can be done on Mac and Linux, alas no possibility for Windows. To install from package, go [there](http://www.argos-sim.info/core.php); to install from source, check [here](https://github.com/ilpincy/argos3/).
 
 In order to check if ARGoS is well installed, just type `argos3 --version`, a green text should appear with the version name of currently installed ARGoS.
 
