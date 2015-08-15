@@ -125,4 +125,8 @@ else
 end
 ```
 
-Tadam! Now you have everything to create complex teams and strategy to apply to real life games.
+Tadam! Now you have everything to create complex teams and strategy to apply back to all previous games. Oh, but let's add one more.
+
+##d) Playing: Regroup & rejoyce
+Easy: regroup on the white areas. What? But we already did that! That's true, but you did that without communication. Now that you have complexe patterns of communicating, try to see how that could affect your previous efficiency. For added bonus, you might want to compete for real estate with another AI! Or ... create another map with black and white spots. One need to reach the black ones, the other the white ones. But as always, cheating is okay so you can strom on the other's spot to make them appear full!
+
