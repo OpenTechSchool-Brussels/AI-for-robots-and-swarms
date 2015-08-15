@@ -3,116 +3,64 @@ layout: default
 title:  "Reference Setup"
 ---
 
-&lt;?xml version="1.0" ?&gt;<br />
-&lt;argos-configuration&gt;<br />
-<br />
-  &lt;!-- ************************* --&gt;<br />
-  &lt;!-- * General configuration * --&gt;<br />
-  &lt;!-- ************************* --&gt;<br />
-  &lt;framework&gt;<br />
-    &lt;experiment length="0" ticks_per_second="10" /&gt;<br />
-    &lt;system threads="0" /&gt;<br />
-  &lt;/framework&gt;<br />
-<br />
-  &lt;!-- *************** --&gt;<br />
-  &lt;!-- * Controllers * --&gt;<br />
-  &lt;!-- *************** --&gt;<br />
-<br />
-  &lt;!-- tip1: If you want to not show the rays of some sensors, just put "false" instead of "true"--&gt;<br />
-  &lt;controllers&gt;<br />
-<br />
-    &lt;lua_controller id="lua"&gt;<br />
-      &lt;actuators&gt;<br />
-        &lt;differential_steering implementation="default" /&gt;<br />
-        &lt;leds implementation="default" medium="leds" /&gt;<br />
-      &lt;/actuators&gt;<br />
-      &lt;sensors&gt;<br />
-        &lt;differential_steering implementation="default" /&gt;<br />
-        &lt;footbot_motor_ground implementation="rot_z_only" /&gt;<br />
-        &lt;footbot_proximity implementation="default" show_rays="true" /&gt;<br />
-        &lt;footbot_light implementation="rot_z_only" /&gt;<br />
-        &lt;colored_blob_omnidirectional_camera implementation="rot_z_only" medium="leds" show_rays="true" /&gt;<br />
-      &lt;/sensors&gt;<br />
-      &lt;params /&gt;<br />
-    &lt;/lua_controller&gt;<br />
-<br />
-  &lt;/controllers&gt;<br />
-<br />
-  &lt;!-- *********************** --&gt;<br />
-  &lt;!-- * Arena configuration * --&gt;<br />
-  &lt;!-- *********************** --&gt;<br />
-  <br />
-  &lt;!-- You can here prametrise the size of the area, position of light--&gt;<br />
-  &lt;!-- distribution of robots and object...--&gt;<br />
-<br />
-  &lt;arena size="4, 4, 1" center="0,0,0.5"&gt;<br />
-<br />
- &lt;light id="light"<br />
-        position="0,0,0.5"<br />
-        orientation="0,0,0"<br />
-        color="yellow"<br />
-        intensity="3.0"<br />
-        medium="leds" /&gt;<br />
-<br />
-    &lt;floor id="f" source="image" path="./one_spot.png" /&gt; <br />
-    <br />
-    &lt;box id="bn" size="0.1, 4, 0.2" movable="false"&gt;<br />
-      &lt;body position="2,0,0"  orientation="0,0,0" /&gt;<br />
-    &lt;/box&gt;<br />
-    &lt;box id="bs" size="0.1, 4, 0.2" movable="false"&gt;<br />
-      &lt;body position="-2,0,0" orientation="0,0,0" /&gt;<br />
-    &lt;/box&gt;<br />
-    &lt;box id="be" size="4, 0.1, 0.2" movable="false"&gt;<br />
-      &lt;body position="0,-2,0" orientation="0,0,0" /&gt;<br />
-    &lt;/box&gt;<br />
-    &lt;box id="bw" size="4, 0.1, 0.2" movable="false"&gt;<br />
-      &lt;body position="0,2,0" orientation="0,0,0" /&gt;<br />
-    &lt;/box&gt;<br />
-<br />
-    &lt;distribute&gt;<br />
-      &lt;position method="uniform" min="-2,-2,0" max="2,2,0" /&gt;<br />
-      &lt;orientation method="uniform" min="0,0,0" max="360,0,0" /&gt;<br />
-      &lt;entity quantity="20" max_trials="100"&gt;<br />
-        &lt;box id="o" size="0.2, 0.2, 0.2" movable="false" /&gt;<br />
-      &lt;/entity&gt;<br />
-    &lt;/distribute&gt;<br />
-<br />
-    &lt;distribute&gt;<br />
-      &lt;position method="uniform" min="-2,-2,0" max="2,2,0" /&gt;<br />
-      &lt;orientation method="uniform" min="0,0,0" max="360,0,0" /&gt;<br />
-      &lt;entity quantity="20" max_trials="100"&gt;<br />
-        &lt;foot-bot id="fb"&gt;<br />
-          &lt;controller config="lua" /&gt;<br />
-        &lt;/foot-bot&gt;<br />
-      &lt;/entity&gt;<br />
-    &lt;/distribute&gt;<br />
-<br />
-  &lt;/arena&gt;<br />
-<br />
-  &lt;!-- ******************* --&gt;<br />
-  &lt;!-- * Physics engines * --&gt;<br />
-  &lt;!-- ******************* --&gt;<br />
-  &lt;physics_engines&gt;<br />
-    &lt;dynamics2d id="dyn2d" /&gt;<br />
-  &lt;/physics_engines&gt;<br />
-<br />
-  &lt;!-- ********* --&gt;<br />
-  &lt;!-- * Media * --&gt;<br />
-  &lt;!-- ********* --&gt;<br />
-  &lt;media&gt;<br />
-    &lt;led id="leds" /&gt;<br />
-  &lt;/media&gt;<br />
-<br />
-<br />
-  &lt;!-- ****************** --&gt;<br />
-  &lt;!-- * Visualization * --&gt;<br />
-  &lt;!-- ****************** --&gt;<br />
-  &lt;visualization&gt;<br />
-    &lt;qt-opengl lua_editor="true"&gt;<br />
-      &lt;camera&gt;<br />
-        &lt;placement idx="0" position="-2.0767,0.015,2.74921" look_at="-1.59254,0.015,1.87423" lens_focal_length="20" /&gt;<br />
-      &lt;/camera&gt;<br />
-    &lt;/qt-opengl&gt;<br />
-  &lt;/visualization&gt;<br />
-<br />
-&lt;/argos-configuration&gt;
+Here we go, deep in the belly of the beast! (Well, actually not really, there is C++ code hidden somewhere but unless you curious minds want more, this will stay the realm of yours truly.) Here we will get some insight about the setup file (the .argos one) that defines the experimental conditions. While this might appear as a whole mess at first (it isn't), we won't go too much in details. Only a few key points are of our worries. If you're curious about more, you might want to check the comments in the files provided.
+
+<span id="nbr_robots"/>
+##a) Number of robots (or other entity)
+There are a few ways to spawn robots in ARGoS. In our case, we used a random spread with the `<distribute>` tag. If you look inside it, you'll see an `<entity>` tag and a `quantity` parameter. As you can already guess, modifying this last one will change the number of robot (or whichever entity).
+
+<span id="new_entities"/>
+##b) Adding new entities
+As mentioned, a few ways to do so. The most versatile for us will be the distribute one. And easiest will be to actually copy past one of its usage and just modify the entity to fit our needs (mainly a box or a robot, done as shown in the same .argos file).
+
+<span id="arena"/>
+##c) Arena size and floor picture.
+To change the picture on the floor (big up to the [Odyssey](https://en.wikipedia.org/wiki/Magnavox_Odyssey)) you just change the file path of the `path` parameter of the `<floor>` tag.
+
+You will need to adjust the size of the arena accordingly, mainly it having the same ratio of width and height. To do so, you will need to modify the `size` parameter of the `<arena>` tag which takes in order width, height and depth (don't change that last one unless you know what you're doing!).
+
+Last, if you want to have a bounded arena, you will need to change the `size` and `position` of the walls defined as the 4 boxes that follows the `<floor>` tag. 
+
+<span id="debug"/>
+##d) Showing rays for debugging purpose
+Sometimes you can actually graphically output something relevant about the sensors you're using. Super useful for debugging purpose. In our case, this works for the proximity sensors and for the camera. If you want to see the rays then you just need to search for `showrays` parameter and change its value from "false" to "true". Guess what you need to do to not see the rays?
+
+By the way: for proximity sensors, blue rays mean nothing is detected close by, purple is when something is detected (`value > 0`); for camera, blue is when it's in line of sight, purple is when it's obstructed.
+
+<span id="ais"/>
+##e) Loading AIs from files
+Haha, now we're playing. Who cares about coding, it's all about letting the AIs do the job! As fun as the external editor is, you can also directly load AIs (unfortunately not updating the code used in the text editor, bummer... be sure to upload it if you want to update the code). This is a good way to run directly your favorite AI or even more important **to make AIs battle each other**. Yep.
+
+So, to load a specific .lua file as your AI, you just need to add a `script` parameter to the `<params>` tag inside your `<lua_controller>` tag. This would look like: `<params script="./battleAI.lua"/>`. Glorious.
+
+Now if you actually want to make Player Vs Player, or should I say, AI Vs AI, you need to do a few things. First, create another (or as many as wanted) `<lua_controller>` with different `id` parameters. you should have something along the lines of:
+
+```xml
+<controllers>
+
+    <lua_controller id="lua_AI_1">
+        <actuators>
+            <!-- bla bla bla your code --> 
+        </actuators>
+        <sensors>
+            <!-- bla bla bla your code -->
+        </sensors>
+        <params/ script="./AI_1.lua">
+    </lua_controller>
+
+    <lua_controller id="lua_AI_2">
+        <actuators>
+            <!-- bla bla bla your code --> 
+        </actuators>
+        <sensors>
+            <!-- bla bla bla your code -->
+        </sensors>
+        <params script="./AI_1.lua"/>
+    </lua_controller>
+
+</controllers>
+```
+
+Then you need to instantiate them (you spawned the brains, time to spawn the bodies). As mentioned twice already (fiou, last time), we'll use a distribute tag (actually, you can straight call a `<foot-bot>` tag). Just copy paste previous whole `<distribute>` tag that were used on a foot bot entity, and just change the `config` parameter to the name of the behavior you just created in the beginning of this section (here, lua_AI_1 and lua_AI_2).
+
+Then sit back, relax, and enjoy the show!
