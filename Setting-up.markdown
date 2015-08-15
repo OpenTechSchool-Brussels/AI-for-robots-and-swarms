@@ -49,7 +49,10 @@ log("Hello, my name is " .. robot.id)
 
 Apart from the classic text editor functionality, you'll see on the right end a little gear icon. Click on it (or press **Ctrl-E**) to execute your code. The code is then loaded in the ARGoS simulator, and you just have to press play to discover its wonder. Which isn't much yet (Yes, the robot can move. They are just sleepy right now). On the right side, you'll see time steps and logging information. The simulation of the world here is executed steps by steps. At each steps (or ticks), the function `step` is called for each robots, and is resolved.
 
-##d) Reference material
+##d) ARGoS UI
+So, your simulation is in place, how do you use it? Well, the button on the top are a bit straight forward. Play plays the simulation, stop stops it, forward makes it quick (how quick? as much as the computer can, linked with the number close by). The mix between pause and play makes the simulation step by step, perfect for debugging. And the camera movement? Done in a not so classic (but workable) way using the mouse, you'll get the hang of it :p
+
+##e) Reference material
 Now a bit of Lua. There is scope for variables. If you want a variable to work as some global memory of your robot, you need to make it global by defining it at the top of your code (not in a function). You'll see that Lua has only one container type, *tables*, being associative arrays. They store a set of key/value pairs. (Imagine an array that you can access not only with numbers, and if with numbers, not necessarily in a straight order). As mentioned earlier, to (re)discover Lua and understand better this notion of table, you might want to check our [reference page](./ref_lua.html).
 
 If you're curious to know more about the end user possibilities of ARGoS, you can explore them from the command line with `argos3 -q _Something_` (q standing for query). `_Something_` can be either `all` if you want info on everything, or the name of sensors, actuators, type of objects in the arena, name of your favourite restaurant... And then again, you still have the other [reference page](./ref_argos.html).
