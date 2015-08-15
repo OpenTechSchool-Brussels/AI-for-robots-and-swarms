@@ -129,6 +129,8 @@ for i = 1, #robot.colored_blob_omnidirectional_camera do
 end
 ```
 
+Ok, text log are pretty greate (they still are), but didn't start lacking any less since last time when you prefere overall view over precision. Bla bla bla reference material. Like for the proxiity sensor, if you remember how, update by yourself the .argos setup file, if you're hesitating a bit, we have you [covered](./ref_setup.html#debug).
+
 ##d) Behaving: blink my minions, blink as one!
 Welcome to the wonderful world of robot communication. With the tools you have already at hands, you can create pretty complex behaviours. A simple and direct application would be using random robots as rally points (tell them to light up their beacons when on places of special interest, and make robots move toward that a specific light colour). 
 
