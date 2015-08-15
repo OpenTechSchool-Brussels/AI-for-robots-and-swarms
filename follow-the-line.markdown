@@ -4,15 +4,30 @@ title:  "Let's get rolling"
 num: 1
 ---
 
-Basic rule of life: if you don't move, things are going to get pretty hard up the road... Now different creature and inventors found various way to solve that issue. To each hardware solution come a different software solutions; you don't control a car, a 4 leg robot or a rocket the same way. In this section we'll discover how to make your robot move and race for the stars.
+Basic rule of life: if you don't move, things are going to get pretty hard up the road... Now different creature and inventors found various way to solve that issue. To each hardware solution come a different software solutions; you don't control a car, a 4 leg robot or a rocket the same way. In this section we'll discover how to make your robot move and race for the stars. In this section, we will use this [setup](./assets/setup/setup_1.tar.gz) with varying circuits.
 
 <img src="./assets/marxbot.jpg" alt="picture of the marxbot" style="height:300px; float:right; margin:10px;">
 
 ## a)  Acting: One robot, two wheels
 
-Actually, they are *treels*, a portmanteau neologism of wheels and trails. But for all your concern, you can see the robot as two wheels along the horizontal axis. Controlling your robot movement will go through setting the speed of each of those wheels. For that we use the `robot.wheels.set_velocity(leftSpeed, rightSpeed)` function which accept two values (yep, left and right speed) as parameters, both measured in cm/s. Positive values will make wheels roll forward, negative will make them roll backward.
+Actually, they are *treels*, a portmanteau neologism of wheels and trails. But for all your concern, you can see the robot as two wheels along the horizontal axis. Controlling your robot movement will go through setting the speed of each of those wheels. For that we use the `robot.wheels.set_velocity(leftSpeed, rightSpeed)` function which accept two values (yep, left and right speed) as parameters, both measured in cm/s. Positive values will make wheels roll forward, negative will make them roll backward. For instance, let's make monomaniac robots:
 
-Is this this simple to control your robot? Yes it is. Try out various speed for each wheels to get a feeling of how the robots is moving. For instance, moving straight is *leftSpeed = rightSpeed*, turning right is *leftSpeed > rightSpeed* and turning on your self is *leftSpeed = -rightSpeed*. While your moving is aimless, you can already think of a few stuff to do with it. Try to draw shapes with your robots for instance (while circle are pretty straight forward, try to draw triangles or more complex shapes!).
+```lua
+-- You will most of the time modify the step function
+function step()
+  robot.wheels.set_velocity(20,20)
+end
+```
+
+Is this this simple to control your robot? Yes it is. Try out various speed for each wheels to get a feeling of how the robots is moving. For instance:
+
+* moving straight and frontward is *leftSpeed = rightSpeed*. Try `robot.wheels.set_velocity(20,20)`.
+* turning right is *leftSpeed > rightSpeed*. Try `robot.wheels.set_velocity(10,20)`.
+* turning on your self is *leftSpeed = -rightSpeed*. Try `robot.wheels.set_velocity(20,-20)`.
+
+While your moving is aimless for now, you can already think of a few stuff to do with it. Try to draw shapes with your robots for instance (while circle are pretty straight forward, try to draw triangles or more complex shapes!).
+
+By the way, here we told that the code must go in the step function (usually the case). It'll be up to you usually to understand where to put the code (not too complex, I assure you) so you'll need to think if the code is meant to be executed once (in `inti()`) or constantly (in `step()`).
 
 While setting directly the wheels' speed does the job, it's not really practical. If the robots think it terms of left and right speed, we don't really. We would be more used to think in terms of moving forward/backward and turning, like when driving a car. So, we want to feed the robot forward speed and an angular speed, and it to translate it to left wheel speed and right wheel speed. Any idea? Try to imagine if you have only forward or angular, and then compose the two of them. Below are a possible solution, don't look at it before you've tried out a little bit by yourself! To make it easier to use, we formalized it as a function. A good time if ever to see how they are coded in Lua!
 
@@ -49,20 +64,15 @@ On of the most common usage for the proximity sensors is to avoid obstacles (obj
 
 ```lua
 
-sensingFront = robot.proximity[1].value  + robot.proximity[2].value +
-               robot.proximity[24].value + robot.proximity[23].value
-
 sensingLeft = robot.proximity[3].value + robot.proximity[4].value +
               robot.proximity[5].value + robot.proximity[6].value
 
 sensingRight = robot.proximity[22].value+ robot.proximity[21].value +
                robot.proximity[20].value + robot.proximity[19].value
 
-if( sensingFront != 0 ) then
-  driveAsCar(-10, 1)
-elseif( sensingLeft != 0 ) then
+if( sensingLeft ~= 0 ) then
   driveAsCar(7,3)
-elseif( sensingRight != 0 ) then
+elseif( sensingRight ~= 0 ) then
   driveAsCar(7,-3)
 else
   driveAsCar(10,0)
@@ -103,6 +113,8 @@ else
   driveAsCar(robot.random.uniform(10,20), robot.random.uniform(-10,10))
 end
 ```
+
+Ok, this is working but we have definitely too many robots trying to form platonic relationships with the arena walls. If not done already, you should mix that behavior with the avoiding one. Hard to mix both of them? Damn right it is, but lucky us, we'll see in next section a glorious way to do so.
 
 ## d) Behaving: Follow the line
 Ok, that is great. You can move, you can see where you are moving. What about coupling both and making you move following marks on the ground? This is actually a very classic algorithm which is solved both by first learners and highly skilled engineers, depending on the environment and precision/speed required. Our job is simple: we have a line, we want to follow it, when it's straight (simple!) and when it's turning (ergh...).
