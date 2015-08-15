@@ -1,6 +1,6 @@
 ---
 layout: default
-title:  "Regroup & Reach"
+title:  "Blink & Wink"
 num: 2
 ---
 
