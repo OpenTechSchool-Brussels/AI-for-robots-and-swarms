@@ -73,9 +73,9 @@ sensingRight = robot.proximity[22].value+ robot.proximity[21].value +
                robot.proximity[20].value + robot.proximity[19].value
 
 if( sensingLeft ~= 0 ) then
-  driveAsCar(7,3)
-elseif( sensingRight ~= 0 ) then
   driveAsCar(7,-3)
+elseif( sensingRight ~= 0 ) then
+  driveAsCar(7,3)
 else
   driveAsCar(10,0)
 end
