@@ -104,7 +104,7 @@ In this section's area are a few patterns on the ground, any idea on how to make
 ```lua
 onSpot = true
 for i = 1,4 do
-    if( robot.motor_ground[i].value > 0.10 ) then
+    if( robot.motor_ground[i].value > 0.90 ) then -- when on a white spot
       onSpot = false
     end
 end
@@ -129,11 +129,11 @@ Ok, that is great. You can move, you can see where you are moving. What about co
 leftSpeed = 5
 rightSpeed = 5
 
-if(robot.motor_ground[1].value > 0.80) then -- something on my left
+if(robot.motor_ground[1].value < 0.40) then -- something on my left
   rightSpeed = -3
 end
 
-if(robot.motor_ground[4].value > 0.80) then -- something on my right
+if(robot.motor_ground[4].value < 0.40) then -- something on my right
   leftSpeed = -3
 end
 
