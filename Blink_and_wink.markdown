@@ -132,7 +132,7 @@ end
 Ok, text log are pretty great (they still are), but didn't start lacking any less since last time when you prefer overall view over precision. Bla bla bla reference material. Like for the proximity sensor, if you remember how, update by yourself the .argos setup file, if you're hesitating a bit, we have you [covered](./ref_setup.html#debug).
 
 ##d) Behaving: blink my minions, blink as one!
-Welcome to the wonderful world of robot communication. In this part, we'll use another setup file, [this one]((./assets/setup/expSetup_2bis.argos). With the tools you have already at hands, you can create pretty complex behaviors. A simple and direct application would be using random robots as rally points (tell them to light up their beacons when on places of special interest, and make robots move toward that a specific light color). 
+Welcome to the wonderful world of robot communication. In this part, we'll use another setup file, [this one](./assets/setup/expSetup_2bis.argos). With the tools you have already at hands, you can create pretty complex behaviors. A simple and direct application would be using random robots as rally points (tell them to light up their beacons when on places of special interest, and make robots move toward that a specific light color). 
 
 Let's see something a bit different, where we can see a more complex behavior emerge, information sharing and convergence toward an agreement. There is a classic task to do that fits all those points: synchronization. In our case, robots will blink their LEDs at a specific frequency, but not all of them together. The point of the game is to create an artificial intelligence that will not only allow two robots to synchronize, but a whole swarm. Bonus point if the swarm is moving.
 
