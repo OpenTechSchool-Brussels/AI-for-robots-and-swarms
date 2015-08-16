@@ -99,7 +99,7 @@ if(cpt>3) then
   up = false
 end
 
-if(cpt<1) then
+if(cpt<2) then
   up = true
 end
 
