@@ -104,7 +104,7 @@ In this section's area are a few patterns on the ground, any idea on how to make
 ```lua
 onSpot = true
 for i = 1,4 do
-    if( robot.motor_ground[i].value > 0.90 ) then -- when on a white spot
+    if( robot.motor_ground[i].value < 0.90 ) then -- not on a white spot
       onSpot = false
     end
 end
