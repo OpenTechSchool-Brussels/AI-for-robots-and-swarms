@@ -7,7 +7,7 @@ num: 0
 So, before creating [robots discarding collected intel and driving into walls](http://bash.org/?240849), let's setup all the necessary tools and get a bit of context. Both are as necessary: one to do things, the other to understand what you're doing!
 
 ##a) ARGoS Simulator
-In order to simulate both our robots and their environment, we'll use ARGoS, a multi-physics robot simulator easily customizable by adding new plug-ins. It can efficiently simulate large-scale swarms of robots. Its accuracy aims to be as close as possible to real simulation. It's a tool created with research in mind and used all around the world in laboratories. While we will use it as an educational tool and later as a gaming platform, its constrains & quality are the same than such that would be required by a professional and research environment. In short: whatever you will create here will have real sense. If your behaviour is getting amazing result on a task, be ready to publish about it, yay!
+In order to simulate both our robots and their environment, we'll use [ARGoS](http://www.argos-sim.info/), a multi-physics robot simulator easily customizable by adding new plug-ins. It can efficiently simulate large-scale swarms of robots. Its accuracy aims to be as close as possible to real simulation. It's a tool created with research in mind and used all around the world in laboratories. While we will use it as an educational tool and later as a gaming platform, its constrains & quality are the same than such that would be required by a professional and research environment. In short: whatever you will create here will have real sense. If your behaviour is getting amazing result on a task, be ready to publish about it, yay!
 
 ARGoS takes three things as entry points:
 
