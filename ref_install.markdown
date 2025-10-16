@@ -62,6 +62,7 @@ If you see both things, congrats, you’re ready for the workshop! You can explo
 
 <h2>Troubleshooting</h2>
 If when trying to run ARGoS you see a red error message, please run the following commands, one by one:
+
 ```bash
 sudo ln -s /usr/lib/x86_64-linux-gnu/libglut.so.3.12.0 /usr/lib/x86_64-linux-gnu/libglut.so.3
 sudo ln -s /usr/lib/x86_64-linux-gnu/libglut.so.3 /usr/lib/
