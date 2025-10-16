@@ -63,3 +63,21 @@ You should see two windows appearing. One with an arena, a painted floor and rob
 If you see both things, congrats, you’re ready for the workshop! You can explore on the left the current version of the tutorial (update coming begining Nov 2025), in order to understand a bit better how to code the robot, and have a bit of experience. This will be very welcomed for the workshop, as you will be able to focus on the linguistic aspect of the behavior.
 
 
+
+###Troubleshooting
+If when trying to run ARGoS you see a red error message, please run the following commands, one by one:
+```bash
+sudo ln -s /usr/lib/x86_64-linux-gnu/libglut.so.3.12.0 /usr/lib/x86_64-linux-gnu/libglut.so.3
+sudo ln -s /usr/lib/x86_64-linux-gnu/libglut.so.3 /usr/lib/
+sudo ldconfig
+```
+
+And run again ARGoS with the same command above.
+
+If you see any other error messages, or if the previous one is still not resolved with those added commands, please do reach us, we will do our best to help you and update this tutorial incorporating your case issue. Thanks for helping us making this short tutorial better!
+
+
+
+
+
+
