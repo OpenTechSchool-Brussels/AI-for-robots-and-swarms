@@ -42,7 +42,6 @@ Run the next command to download ARGoS, a configuration file, and a floor image:
 wget 'https://github.com/OpenTechSchool-Brussels/AI-for-robots-and-swarms/raw/refs/heads/gh-pages/assets/argos3_b59.deb'
 wget 'https://github.com/OpenTechSchool-Brussels/AI-for-robots-and-swarms/raw/refs/heads/gh-pages/assets/configTest.argos'
 wget 'https://github.com/OpenTechSchool-Brussels/AI-for-robots-and-swarms/raw/refs/heads/gh-pages/assets/floor.png'
-
 ```
 
 And this one to install it (press Y and then enter when asked to do so):
