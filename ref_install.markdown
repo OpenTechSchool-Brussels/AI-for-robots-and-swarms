@@ -3,7 +3,7 @@ layout: default
 title:  "ARGoS Installation Tutorial"
 ---
 
-*Instalation of ARGoS on Linux and Mac is straight forward, please refer to [argos-sim.info/user_manual.php](http://www.argos-sim.info/user_manual.php) to install ARGoS. Please be sure to reach us if there are any issues.*
+*Installation of ARGoS on Linux and Mac is straight forward, please refer to [argos-sim.info/user_manual.php](http://www.argos-sim.info/user_manual.php) to install ARGoS. Please be sure to reach us if there are any issues.*
 
 In this tutorial, we will show you how to install ARGoS on a Windows 11 machine. ARGoS is only native on Mac and specific flavors of Linux, so we will first need to install WSL (Windows Subsystem for Linux) that allows you to run any program that runs on Linux. Then, we will install ARGoS as if we were on Linux, and finish by making some modifications with libraries in order for ARGoS to reach them. You need to have administrative privilege on this machine, or at least to have high enough clearance to be able to install software on it. If you’re not sure, please check with your IT department or give the tutorial a go!
 
