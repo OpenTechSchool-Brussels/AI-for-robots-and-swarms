@@ -10,7 +10,7 @@ In this tutorial, we will show you how to install ARGoS on a Windows 11 machine.
 The whole process takes less than half an hour, most of it spent waiting for downloads to finish. It is important that you come with ARGoS installed so we can make the best of the time spent together during the workshop. If you have any issues (or even just questions) during the installation process, be sure to reach me at roman.miletitch@mpi.nl. We will do our best to help you!
 
 
-###Step by step
+<h2>Step by step</h2>
 The first step is to install WSL. For that you need to open the Power Shell (the command line of Windows). To do so, open your start menu (either by pressing on the Windows key of your keyboard, or by clicking on the start/window button in your task bar). Then, in the search text area, enter **PowerShell**, and then click on the associated program that should appear in the list.
 
 In the **PowerShell**, type the following command and run it (press enter) in order to install WSL:
@@ -61,7 +61,7 @@ If you see both things, congrats, you’re ready for the workshop! You can explo
 
 
 
-###Troubleshooting
+<h2>Troubleshooting</h2>
 If when trying to run ARGoS you see a red error message, please run the following commands, one by one:
 ```bash
 sudo ln -s /usr/lib/x86_64-linux-gnu/libglut.so.3.12.0 /usr/lib/x86_64-linux-gnu/libglut.so.3
