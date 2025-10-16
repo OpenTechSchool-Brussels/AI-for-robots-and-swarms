@@ -3,7 +3,7 @@ layout: default
 title:  "ARGoS Installation Tutorial"
 ---
 
-*Instalation of ARGoS on Linux and Mac is straight forward, please refer to https://www.argos-sim.info/user_manual.php to install ARGoS. Please be sure to reach us if there are any issues.*
+*Instalation of ARGoS on Linux and Mac is straight forward, please refer to [argos-sim.info/user_manual.php](http://www.argos-sim.info/user_manual.php) to install ARGoS. Please be sure to reach us if there are any issues.*
 
 In this tutorial, we will show you how to install ARGoS on a Windows 11 machine. ARGoS is only native on Mac and specific flavors of Linux, so we will first need to install WSL (Windows Subsystem for Linux) that allows you to run any program that runs on Linux. Then, we will install ARGoS as if we were on Linux, and finish by making some modifications with libraries in order for ARGoS to reach them. You need to have administrative privilege on this machine, or at least to have high enough clearance to be able to install software on it. If you’re not sure, please check with your IT department or give the tutorial a go!
 
@@ -39,7 +39,7 @@ sudo apt update && sudo apt upgrade
 
 Run the next command to download ARGoS:
 ```bash
-wget https://opentechschool-brussels.github.io/AI-for-robots-and-swarms/assets/argos3_deb39.deb
+wget https://github.com/OpenTechSchool-Brussels/AI-for-robots-and-swarms/raw/refs/heads/gh-pages/assets/argos3_b59.deb
 ```
 
 And this one to install it (press Y and then enter when asked to do so):
@@ -49,7 +49,7 @@ sudo apt install ./argos3_b39.deb
 
 ARGoS should be installed! now let's download a configuration file to test it out:
 ```bash
-wget https://opentechschool-brussels.github.io/AI-for-robots-and-swarms/assets/configTest.argos
+wget https://github.com/OpenTechSchool-Brussels/AI-for-robots-and-swarms/raw/refs/heads/gh-pages/assets/configTest.argos
 ```
 
 You can now test out ARGoS with the following command:
