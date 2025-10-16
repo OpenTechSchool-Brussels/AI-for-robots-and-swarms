@@ -37,21 +37,18 @@ Now is time to run an update on your system, to be sure that your software repos
 sudo apt update && sudo apt upgrade
 ```
 
-Run the next command to download ARGoS:
+Run the next command to download ARGoS, a configuration file, and a floor image:
 ```bash
-wget https://github.com/OpenTechSchool-Brussels/AI-for-robots-and-swarms/raw/refs/heads/gh-pages/assets/argos3_b59.deb
+wget 'https://github.com/OpenTechSchool-Brussels/AI-for-robots-and-swarms/raw/refs/heads/gh-pages/assets/argos3_b59.deb'
+wget 'https://github.com/OpenTechSchool-Brussels/AI-for-robots-and-swarms/raw/refs/heads/gh-pages/assets/configTest.argos'
+wget 'https://github.com/OpenTechSchool-Brussels/AI-for-robots-and-swarms/raw/refs/heads/gh-pages/assets/floor.png'
+
 ```
 
 And this one to install it (press Y and then enter when asked to do so):
 ```bash
 sudo apt install ./argos3_b39.deb
 ``` 
-
-ARGoS should be installed! now let's download a configuration file to test it out:
-```bash
-wget https://github.com/OpenTechSchool-Brussels/AI-for-robots-and-swarms/raw/refs/heads/gh-pages/assets/configTest.argos
-```
-
 You can now test out ARGoS with the following command:
 ```bash
 argos3 -c configTest.argos
